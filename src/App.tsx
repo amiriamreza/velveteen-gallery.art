@@ -1,8 +1,7 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 
 import heroImg from './assets/hero-grass.jpg'
-import paintingImg from './assets/painting.jpg'
-import lightsImg from './assets/painting-lights.jpg'
+import paintingImg from './assets/painting-acrylic.jpg'
 import robotImg from './assets/painting-robot.jpg'
 import digitalImg from './assets/digital.jpg'
 import nvidiaImg from './assets/nvidia-event.jpg'
@@ -33,6 +32,13 @@ import lVectorvol from './assets/logo-vectorvol.png'
 import lZcash from './assets/logo-zcash.png'
 import lZcashNames from './assets/logo-zcash-names.png'
 
+const animSrc = Object.values(
+  import.meta.glob('./assets/animated.{mp4,webm}', { eager: true, query: '?url', import: 'default' }),
+)[0] as string | undefined
+const animPoster = Object.values(
+  import.meta.glob('./assets/animated-poster.{jpg,png}', { eager: true, query: '?url', import: 'default' }),
+)[0] as string | undefined
+
 const INSTAGRAM = 'https://instagram.com/velveteengallery'
 const TITLE = 'KZ in Space'
 
@@ -45,21 +51,21 @@ type Spot = {
   y: number
 }
 
-// x and y are percent coordinates on painting.jpg. Change them here to move a pin.
+// x and y are percent coordinates on painting-acrylic.jpg. Change them here to move a pin.
 const SPOTS: Spot[] = [
-  { id: 'astana', name: 'Astana Hub', where: 'The eye of the left drone', logo: lAstana, x: 16, y: 11 },
-  { id: 'higgs', name: 'Higgsfield', where: 'Orange squiggle by the right drone rope', logo: lHiggsfield, x: 45.5, y: 21 },
-  { id: 'vector', name: 'Vector Vol', where: 'Top of the green tapestry', logo: lVectorvol, x: 10, y: 31 },
-  { id: 'olive', name: 'Olive', where: 'Blue tile on the yurt wall', logo: lOlive, x: 36.5, y: 34.5 },
-  { id: 'soup', name: 'Soup', where: 'Brown tile on the yurt wall', logo: lSoup, x: 36.5, y: 37.8 },
-  { id: 'farcaster', name: 'Farcaster', where: 'Hidden on the stove', logo: lFarcaster, x: 33.5, y: 47 },
-  { id: 'zn', name: 'ZCash Names', where: 'Crater on the moon', logo: lZcashNames, x: 63.5, y: 17.5 },
-  { id: 'eth', name: 'Ethereum', where: 'Crater on the moon', logo: lEthereum, x: 77.5, y: 19.5 },
-  { id: 'sol', name: 'Solana', where: 'Crater on the moon', logo: lSolana, x: 57, y: 25 },
-  { id: 'zec', name: 'Zcash', where: 'Crater on the moon', logo: lZcash, x: 67, y: 27.5 },
-  { id: 'btc', name: 'Bitcoin', where: 'Crater on the moon', logo: lBitcoin, x: 71, y: 32.5 },
-  { id: 'ns', name: 'Network School', where: 'The flag', logo: lNS, x: 94.5, y: 70.5 },
-  { id: 'nvidia', name: 'NVIDIA', where: 'Glowing eye on the floating island', logo: lNvidia, x: 71.5, y: 79.5 },
+  { id: 'astana', name: 'Astana Hub', where: 'The eye of the left drone', logo: lAstana, x: 26.4, y: 22.5 },
+  { id: 'higgs', name: 'Higgsfield', where: 'Orange squiggle by the right drone rope', logo: lHiggsfield, x: 45.3, y: 29.7 },
+  { id: 'vector', name: 'Vector Vol', where: 'Top of the green tapestry', logo: lVectorvol, x: 22.2, y: 36.6 },
+  { id: 'olive', name: 'Olive', where: 'Blue tile on the yurt wall', logo: lOlive, x: 39.4, y: 39.3 },
+  { id: 'soup', name: 'Soup', where: 'Brown tile on the yurt wall', logo: lSoup, x: 39.4, y: 41.7 },
+  { id: 'farcaster', name: 'Farcaster', where: 'Hidden on the stove', logo: lFarcaster, x: 37.4, y: 48.4 },
+  { id: 'zn', name: 'ZCash Names', where: 'Crater on the moon', logo: lZcashNames, x: 56.9, y: 27.3 },
+  { id: 'eth', name: 'Ethereum', where: 'Crater on the moon', logo: lEthereum, x: 65.9, y: 28.8 },
+  { id: 'sol', name: 'Solana', where: 'Crater on the moon', logo: lSolana, x: 52.7, y: 32.6 },
+  { id: 'zec', name: 'Zcash', where: 'Crater on the moon', logo: lZcash, x: 59.2, y: 34.4 },
+  { id: 'btc', name: 'Bitcoin', where: 'Crater on the moon', logo: lBitcoin, x: 61.9, y: 38.0 },
+  { id: 'ns', name: 'Network School', where: 'The flag', logo: lNS, x: 78.1, y: 66.3 },
+  { id: 'nvidia', name: 'NVIDIA', where: 'Glowing eye on the floating island', logo: lNvidia, x: 62.8, y: 73.1 },
 ]
 
 const LEFT = SPOTS.filter((s) => s.x < 50)
@@ -176,7 +182,7 @@ function Annotated() {
   )
 }
 
-type Shot = { src: string; title: string; text: string; wide?: boolean }
+type Shot = { src: string; title: string; text: string; wide?: boolean; tall?: boolean }
 
 const SHOTS: Shot[] = [
   { src: balajiImg, title: 'Balaji Srinivasan', text: 'Founder of Network School, with the finished painting.' },
@@ -184,7 +190,7 @@ const SHOTS: Shot[] = [
   { src: oliveImg, title: 'Sepehr Vali, Olive', text: 'Founder of Olive, the on-chain options exchange built on Solana.' },
   { src: farcasterImg, title: 'The Farcaster team', text: 'At the Network School wall in Astana.' },
   { src: vectorvolImg, title: 'The Vector Vol team', text: 'Studio visit with the painting.' },
-  { src: nsGroupImg, title: 'Network School members', text: 'In front of the digital piece on the LED wall.', wide: true },
+  { src: nsGroupImg, title: 'Network School members', text: 'In front of the digital piece on the LED wall.', wide: true, tall: true },
 ]
 
 const WALL: { src: string; title: string; alt: string }[][] = [
@@ -239,6 +245,7 @@ export default function App() {
         <a href="#top" className="brand">Velveteen</a>
         <nav>
           <a href="#piece">The Piece</a>
+          <a href="#animated">Animated</a>
           <a href="#hidden">In the Paint</a>
           <a href="#community">Paintings</a>
           <a href="#people">The People</a>
@@ -280,26 +287,35 @@ export default function App() {
                 <span>The original scene, shown on the LED wall at Alem in Astana.</span>
               </figcaption>
             </figure>
-            <div className="stack">
-              <figure className="rv">
-                <div className="pic">
-                  <img src={lightsImg} alt="The painting in front of a light installation" />
-                </div>
-                <figcaption>
-                  <b>Acrylic painting, 12 × 12 in</b>
-                  <span>Painted from the digital piece, with the logos added by hand.</span>
-                </figcaption>
-              </figure>
-              <figure className="rv">
-                <div className="pic">
-                  <img src={robotImg} alt="The painting in front of the Digital Bridge robot in Astana" />
-                </div>
-                <figcaption>
-                  <b>With the Digital Bridge robot</b>
-                  <span>Astana, during Digital Bridge week.</span>
-                </figcaption>
-              </figure>
-            </div>
+            <figure className="rv fill">
+              <div className="pic">
+                <img src={robotImg} alt="The acrylic painting in front of the Digital Bridge robot in Astana" />
+              </div>
+              <figcaption>
+                <b>Acrylic painting, 12 × 12 in</b>
+                <span>Painted from the digital piece, with the logos added by hand. Shown with the Digital Bridge robot in Astana.</span>
+              </figcaption>
+            </figure>
+          </div>
+        </section>
+
+        <section id="animated" className="band g-red">
+          <div className="head rv">
+            <h2>The animated version.</h2>
+          </div>
+          <div className="anim">
+            <figure className="rv">
+              <div className="pic">
+                {animSrc ? (
+                  <video src={animSrc} poster={animPoster} controls playsInline loop preload="metadata" />
+                ) : (
+                  <div className="soon">The animation is on its way.</div>
+                )}
+              </div>
+              <figcaption>
+                <b>KZ in Space, in motion</b>
+              </figcaption>
+            </figure>
           </div>
         </section>
 
@@ -357,7 +373,7 @@ export default function App() {
           </div>
           <div className="grid">
             {SHOTS.map((s) => (
-              <figure key={s.title} className={'shot rv' + (s.wide ? ' wide' : '')}>
+              <figure key={s.title} className={'shot rv' + (s.wide ? ' wide' : '') + (s.tall ? ' tall' : '')}>
                 <div className="pic">
                   <img src={s.src} alt={s.title} loading="lazy" />
                 </div>

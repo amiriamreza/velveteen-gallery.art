@@ -26,6 +26,7 @@ h1,h2,h3{font-family:var(--head);font-weight:400;line-height:1.02;letter-spacing
 .g-purple{--ground:var(--purple);--fg:#fff}
 .g-orange{--ground:var(--orange);--fg:var(--ink)}
 .g-ink{--ground:var(--ink);--fg:#fff}
+.g-red{--ground:var(--red);--fg:#fff}
 .g-lav{--ground:var(--lav);--fg:var(--ink)}
 
 .nav{position:sticky;top:0;z-index:40;display:flex;justify-content:space-between;align-items:center;padding:12px 24px;background:var(--ink);color:#fff}
@@ -38,6 +39,7 @@ h1,h2,h3{font-family:var(--head);font-weight:400;line-height:1.02;letter-spacing
 .pic{position:relative;padding:14px;transition:transform .35s cubic-bezier(.2,.8,.2,1)}
 .pic::before{content:"";position:absolute;inset:0;background:var(--paper);filter:url(#rough)}
 .pic img{position:relative;width:100%}
+.pic>video,.pic>.soon{position:relative}
 figure{background:none}
 figcaption{padding:14px 4px 0;display:flex;flex-direction:column;gap:2px}
 figcaption b{font-family:var(--head);font-weight:400;font-size:22px;line-height:1.1}
@@ -59,13 +61,12 @@ figcaption span{font-size:15px;opacity:.9}
 .head{margin-bottom:48px;max-width:46em}
 .head h2{font-size:clamp(34px,4.6vw,64px)}
 .sub{margin-top:16px;font-size:18px;font-weight:500}
-.two{display:grid;grid-template-columns:repeat(3,1fr);gap:36px;align-items:stretch}
-.two>figure,.stack figure{display:flex;flex-direction:column}
-.stack{display:contents}
-.stack .pic{flex:1;min-height:360px}
-.stack .pic img{position:absolute;inset:14px;width:calc(100% - 28px);height:calc(100% - 28px);object-fit:cover}
+.two{display:grid;grid-template-columns:.9fr 1fr;gap:48px;align-items:stretch}
+.two>figure{display:flex;flex-direction:column}
+.two figure.fill .pic{flex:1;min-height:360px}
+.two figure.fill .pic img{position:absolute;inset:14px;width:calc(100% - 28px);height:calc(100% - 28px);object-fit:cover}
 .two figure:nth-child(1) .pic{transform:rotate(-1deg)}
-.stack figure:nth-child(2) .pic{transform:rotate(1.2deg)}
+.two figure.fill .pic{transform:rotate(1.2deg)}
 
 .annot{position:relative;display:grid;grid-template-columns:200px minmax(0,1fr) 200px;gap:64px;align-items:stretch;max-width:1180px;margin:0 auto}
 .col{display:flex;flex-direction:column;justify-content:space-around;gap:12px}
@@ -103,6 +104,7 @@ figcaption span{font-size:15px;opacity:.9}
 .shot .pic{flex:1;display:flex}
 .shot .pic img{height:100%}
 .shot img{width:100%;height:100%;max-height:560px;object-fit:cover}
+.shot.tall .pic img{max-height:none;height:auto}
 .shot:nth-child(odd) .pic{transform:rotate(-.8deg)}
 .shot:nth-child(even) .pic{transform:rotate(.8deg)}
 
@@ -144,8 +146,14 @@ footer span{font-family:var(--head);font-size:20px}
   .wall .c:nth-child(2){margin-top:0}
   .grid{grid-template-columns:1fr}
   .shot.wide,.shot.wide:last-child{grid-column:auto}
-  .stack{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-  .stack .pic{min-height:230px}
+  .two figure.fill .pic{min-height:0}
+  .two figure.fill .pic img{position:relative;inset:auto;width:100%;height:auto}
   .about{gap:44px}
   .about-img .b{display:none}
 }
+
+.anim{display:flex;flex-direction:column;align-items:center}
+.anim figure{max-width:100%}
+.anim .pic{display:inline-block;max-width:100%;transform:rotate(-.8deg)}
+.anim video{display:block;width:auto;max-width:100%;max-height:82vh;background:var(--ink)}
+.anim .soon{display:grid;place-items:center;width:min(780px,86vw);aspect-ratio:16/9;background:var(--ink);color:var(--yellow);font-family:var(--head);font-size:clamp(26px,4vw,44px);text-align:center;padding:24px}

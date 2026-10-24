@@ -1,351 +1,338 @@
-import { useEffect, useState } from 'react'
-import alemScreen from './assets/alem-screen.jpg'
-import bitbaselVenue from './assets/bitbasel-venue.jpg'
-import pinkFloydOscars from './assets/pink-floyd-oscars.jpg'
-import timesSquareNftNyc from './assets/times-square-nft-nyc.jpg'
-import bitbaselLivePaint from './assets/bitbasel-live-paint.jpg'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 
-const DEADLINE = new Date('2026-09-25T00:00:00Z').getTime()
+import heroImg from './assets/hero-grass.jpg'
+import paintingImg from './assets/painting.jpg'
+import lightsImg from './assets/painting-lights.jpg'
+import robotImg from './assets/painting-robot.jpg'
+import digitalImg from './assets/digital.jpg'
+import nvidiaImg from './assets/nvidia-event.jpg'
+import balajiImg from './assets/balaji.jpg'
+import oliveImg from './assets/olive.jpg'
+import vectorvolImg from './assets/vectorvol.jpg'
+import nsGroupImg from './assets/ns-group.jpg'
+import farcasterImg from './assets/farcaster.jpg'
+import miriamImg from './assets/miriam-1.jpg'
+import miriam2Img from './assets/miriam-2.jpg'
 
-interface Tier {
-  tag: string
-  price: string
+import lAstana from './assets/logo-astana-hub.png'
+import lBitcoin from './assets/logo-bitcoin.png'
+import lEthereum from './assets/logo-ethereum.png'
+import lFarcaster from './assets/logo-farcaster.png'
+import lHiggsfield from './assets/logo-higgsfield.png'
+import lNS from './assets/logo-network-school.png'
+import lNvidia from './assets/logo-nvidia.png'
+import lOlive from './assets/logo-olive.png'
+import lSolana from './assets/logo-solana.png'
+import lSoup from './assets/logo-soup.png'
+import lVectorvol from './assets/logo-vectorvol.png'
+import lZcash from './assets/logo-zcash.png'
+import lZcashNames from './assets/logo-zcash-names.png'
+
+const INSTAGRAM = 'https://instagram.com/velveteengallery'
+const TITLE = 'KZ in Space'
+
+type Spot = {
+  id: string
   name: string
-  desc: string
-  includes: string[]
-  avail: string
-  featured?: boolean
-  stripeUrl: string
-  dataTier: string
+  where: string
+  logo: string
+  x: number
+  y: number
 }
 
-const TIERS: Tier[] = [
-  {
-    tag: 'Tier 1',
-    price: '$1,000',
-    name: 'Logo Placement',
-    desc: 'Your logo embedded directly into the digital piece. Clean, credited, permanent.',
-    includes: [
-      'Logo embedded in the digital artwork',
-      'Photo of the placement sent to you',
-      'Credited when the piece is unveiled',
-    ],
-    avail: 'Multiple spots available',
-    stripeUrl: 'https://buy.stripe.com/5kQ28scQCfjq4RkgGp4Ni00',
-    dataTier: 'Tier 1: $1,000 Logo Placement',
-  },
-  {
-    tag: 'Tier 2',
-    price: '$5,000',
-    name: 'Custom Illustration',
-    desc: 'A custom illustration built into the scene alongside your logo. Your brand becomes part of the world, not just a mark on it.',
-    includes: [
-      'Custom illustration + logo, digital piece',
-      'Placement chosen for visibility',
-      'Photo + short video of the placement',
-      'Credited when the piece is unveiled',
-    ],
-    avail: '5 spots available',
-    featured: true,
-    stripeUrl: 'https://buy.stripe.com/bJeaEY8Am6MU3Ng89T4Ni01',
-    dataTier: 'Tier 2: $5,000 Custom Illustration',
-  },
-  {
-    tag: 'Tier 3',
-    price: '$10,000',
-    name: 'Digital + Physical',
-    desc: 'Placement on both the digital piece and the companion 12×12 in acrylic painting, shown alongside it in Astana.',
-    includes: [
-      'Placement on the digital piece',
-      'Placement on the physical acrylic painting',
-      'Featured in event documentation from both shows',
-      'Direct credit as a lead sponsor',
-    ],
-    avail: '2 spots available',
-    stripeUrl: 'https://buy.stripe.com/8x2bJ2dUGc7egA2fCl4Ni02',
-    dataTier: 'Tier 3: $10,000 Digital + Physical',
-  },
+// x and y are percent coordinates on painting.jpg. Change them here to move a pin.
+const SPOTS: Spot[] = [
+  { id: 'astana', name: 'Astana Hub', where: 'The eye of the left drone', logo: lAstana, x: 16, y: 11 },
+  { id: 'higgs', name: 'Higgsfield', where: 'Orange squiggle by the right drone rope', logo: lHiggsfield, x: 45.5, y: 21 },
+  { id: 'vector', name: 'Vector Vol', where: 'Top of the green tapestry', logo: lVectorvol, x: 10, y: 31 },
+  { id: 'olive', name: 'Olive', where: 'Blue tile on the yurt wall', logo: lOlive, x: 36.5, y: 34.5 },
+  { id: 'soup', name: 'Soup', where: 'Brown tile on the yurt wall', logo: lSoup, x: 36.5, y: 37.8 },
+  { id: 'farcaster', name: 'Farcaster', where: 'Hidden on the stove', logo: lFarcaster, x: 33.5, y: 47 },
+  { id: 'zn', name: 'ZCash Names', where: 'Crater on the moon', logo: lZcashNames, x: 63.5, y: 17.5 },
+  { id: 'eth', name: 'Ethereum', where: 'Crater on the moon', logo: lEthereum, x: 77.5, y: 19.5 },
+  { id: 'sol', name: 'Solana', where: 'Crater on the moon', logo: lSolana, x: 57, y: 25 },
+  { id: 'zec', name: 'Zcash', where: 'Crater on the moon', logo: lZcash, x: 67, y: 27.5 },
+  { id: 'btc', name: 'Bitcoin', where: 'Crater on the moon', logo: lBitcoin, x: 71, y: 32.5 },
+  { id: 'ns', name: 'Network School', where: 'The flag', logo: lNS, x: 94.5, y: 70.5 },
+  { id: 'nvidia', name: 'NVIDIA', where: 'Glowing eye on the floating island', logo: lNvidia, x: 71.5, y: 79.5 },
 ]
 
-const FAQS = [
-  {
-    q: 'What happens after I claim a tier?',
-    a: "You'll hear back directly by email or DM with payment details and a short brief for your logo/illustration file. Nothing is charged automatically from this page.",
-  },
-  {
-    q: 'What file format does my logo need to be?',
-    a: "Vector (SVG or AI) preferred, high-res PNG with transparent background otherwise. If you're going for Tier 2's custom illustration, brand colors and any reference imagery are helpful but not required.",
-  },
-  {
-    q: 'Can I pay in crypto?',
-    a: 'Yes, USDC is accepted alongside standard card payment. Details are sent once you claim a tier.',
-  },
-  {
-    q: 'What if a tier fills up before I claim it?',
-    a: 'Reach out anyway. Placement within a tier has some flexibility, and Tier 1 in particular can accommodate more than one sponsor.',
-  },
-  {
-    q: 'Is this piece really going to both events?',
-    a: 'Yes. Both the digital piece and the companion acrylic painting will be shown at Alem.ai during Digital Bridge in Astana, and again together at BitBasel in Miami. The exact timing and schedule within each event is still being finalized.',
-  },
+const LEFT = SPOTS.filter((s) => s.x < 50)
+const RIGHT = SPOTS.filter((s) => s.x >= 50).sort((a, b) => a.y - b.y)
+
+type Line = { id: string; x1: number; y1: number; x2: number; y2: number }
+
+function Annotated() {
+  const wrap = useRef<HTMLDivElement>(null)
+  const img = useRef<HTMLDivElement>(null)
+  const cards = useRef<Record<string, HTMLDivElement | null>>({})
+  const [lines, setLines] = useState<Line[]>([])
+  const [active, setActive] = useState<string | null>(null)
+
+  useLayoutEffect(() => {
+    const calc = () => {
+      const w = wrap.current
+      const p = img.current
+      if (!w || !p) return
+      if (window.innerWidth < 900) {
+        setLines([])
+        return
+      }
+      const wb = w.getBoundingClientRect()
+      const pb = p.getBoundingClientRect()
+      const out: Line[] = []
+      for (const s of SPOTS) {
+        const c = cards.current[s.id]
+        if (!c) continue
+        const cb = c.getBoundingClientRect()
+        const left = s.x < 50
+        out.push({
+          id: s.id,
+          x1: (left ? cb.right : cb.left) - wb.left,
+          y1: cb.top + cb.height / 2 - wb.top,
+          x2: pb.left + (pb.width * s.x) / 100 - wb.left,
+          y2: pb.top + (pb.height * s.y) / 100 - wb.top,
+        })
+      }
+      setLines(out)
+    }
+    calc()
+    window.addEventListener('resize', calc)
+    const t = window.setTimeout(calc, 500)
+    const im = img.current?.querySelector('img')
+    im?.addEventListener('load', calc)
+    return () => {
+      window.removeEventListener('resize', calc)
+      window.clearTimeout(t)
+      im?.removeEventListener('load', calc)
+    }
+  }, [])
+
+  const card = (s: Spot) => (
+    <div
+      key={s.id}
+      ref={(el) => {
+        cards.current[s.id] = el
+      }}
+      className={'spot' + (active === s.id ? ' on' : '')}
+      onMouseEnter={() => setActive(s.id)}
+      onMouseLeave={() => setActive(null)}
+    >
+      <span className="num">{SPOTS.indexOf(s) + 1}</span>
+      <div className="logo">
+        <img src={s.logo} alt={s.name} loading="lazy" />
+      </div>
+      <div className="meta">
+        <b>{s.name}</b>
+        <small>{s.where}</small>
+      </div>
+    </div>
+  )
+
+  return (
+    <div className="annot" ref={wrap}>
+      <div className="col">{LEFT.map(card)}</div>
+      <div className="paint" ref={img}>
+        <img src={paintingImg} alt="Acrylic painting with company logos hidden in the scene" />
+        {SPOTS.map((s) => (
+          <span
+            key={s.id}
+            className={'pin' + (active === s.id ? ' on' : '')}
+            style={{ left: s.x + '%', top: s.y + '%' }}
+            onMouseEnter={() => setActive(s.id)}
+            onMouseLeave={() => setActive(null)}
+          >
+            {SPOTS.indexOf(s) + 1}
+          </span>
+        ))}
+      </div>
+      <div className="col">{RIGHT.map(card)}</div>
+      <svg className="lines" aria-hidden="true">
+        <defs>
+          <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0 0 L10 5 L0 10 z" fill="#E3B34F" />
+          </marker>
+        </defs>
+        {lines.map((l) => (
+          <line
+            key={l.id}
+            x1={l.x1}
+            y1={l.y1}
+            x2={l.x2}
+            y2={l.y2}
+            className={active === l.id ? 'on' : ''}
+            markerEnd="url(#arr)"
+          />
+        ))}
+      </svg>
+    </div>
+  )
+}
+
+type Shot = { src: string; title: string; text: string; wide?: boolean }
+
+const SHOTS: Shot[] = [
+  { src: balajiImg, title: 'Balaji Srinivasan', text: 'Founder of Network School, with the finished painting.' },
+  { src: nvidiaImg, title: 'NVIDIA in Kazakhstan', text: 'Held up at the fireside chat with Jensen Huang, October 23, 2026.', wide: true },
+  { src: oliveImg, title: 'Sepehr Vali, Olive', text: 'Founder of Olive, the on-chain options exchange built on Solana.' },
+  { src: farcasterImg, title: 'The Farcaster team', text: 'At the Network School wall in Astana.' },
+  { src: vectorvolImg, title: 'The Vector Vol team', text: 'Studio visit with the painting.' },
+  { src: nsGroupImg, title: 'Network School members', text: 'In front of the digital piece on the LED wall.', wide: true },
 ]
 
-function useCountdown(deadline: number) {
-  const [remaining, setRemaining] = useState(() => deadline - Date.now())
-
+function useReveal() {
   useEffect(() => {
-    const id = setInterval(() => setRemaining(deadline - Date.now()), 1000)
-    return () => clearInterval(id)
-  }, [deadline])
-
-  if (remaining <= 0) return { days: 0, hours: 0, mins: 0, secs: 0 }
-
-  const days = Math.floor(remaining / (1000 * 60 * 60 * 24))
-  const hours = Math.floor((remaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
-  const mins = Math.floor((remaining % (1000 * 60 * 60)) / (1000 * 60))
-  const secs = Math.floor((remaining % (1000 * 60)) / 1000)
-  return { days, hours, mins, secs }
-}
-
-function handleTierClick(dataTier: string) {
-  try {
-    sessionStorage.setItem('selectedTier', dataTier)
-  } catch {
-    // ignore
-  }
+    const els = document.querySelectorAll('.rv')
+    const io = new IntersectionObserver(
+      (es) => es.forEach((e) => e.isIntersecting && e.target.classList.add('in')),
+      { threshold: 0.08 },
+    )
+    els.forEach((e) => io.observe(e))
+    return () => io.disconnect()
+  }, [])
 }
 
 export default function App() {
-  const { days, hours, mins, secs } = useCountdown(DEADLINE)
-
+  useReveal()
   return (
     <>
-      <header>
+      <header className="nav">
+        <a href="#top" className="brand">Velveteen</a>
         <nav>
-          <a href="#top" className="brand">Velveteen</a>
-          <ul className="nav-links">
-            <li><a href="#tiers">Sponsor tiers</a></li>
-            <li><a href="#events">Events</a></li>
-            <li><a href="#perks">What you get</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#faq">FAQ</a></li>
-          </ul>
-          <a href="#tiers" className="nav-cta">Sponsor the piece</a>
+          <a href="#piece">The Piece</a>
+          <a href="#hidden">In the Paint</a>
+          <a href="#people">The People</a>
+          <a href="#about">About</a>
+          <a href={INSTAGRAM} target="_blank" rel="noreferrer">Instagram</a>
         </nav>
       </header>
 
-      <main>
-        <section className="hero" id="top">
-          <div className="wrap">
-            <div className="hero-grid">
-              <div>
-                <h1>Your logo on my art attends Digital Bridge Astana 2026 and BitBasel Miami 2026.</h1>
-                <p className="hero-sub">A large-scale piece built around Kazakhstan's own mythology and its shift from fossil fuels to a space-tech future: drones lifting yurts, dinosaurs retiring, rockets launching. One piece, two of the biggest stages in tech and digital art this year.</p>
-                <div className="hero-events">
-                  <span className="hero-event-chip"><span className="dot" />Digital Bridge, Astana, October 2026</span>
-                  <span className="hero-event-chip"><span className="dot" />BitBasel, Miami, Dec 2026</span>
-                </div>
-                <div className="hero-actions">
-                  <a href="#tiers" className="btn-primary">See sponsor tiers</a>
-                  <a href="#about" className="btn-ghost">About the artist</a>
-                </div>
-              </div>
-              <div className="funding-card">
-                <div className="amount-label">Raised so far</div>
-                <div className="amount">$0 <span style={{ fontSize: 16, color: 'var(--text-muted)', fontWeight: 400 }}>of $30,000 goal</span></div>
-                <div className="progress-track"><div className="progress-fill" style={{ width: '1%' }} /></div>
-                <div className="funding-meta">
-                  <span>0 sponsors so far</span>
-                  <span>3 tiers open</span>
-                </div>
-                <div className="countdown">
-                  <div className="countdown-label">Sponsorship window closes</div>
-                  <div className="countdown-grid">
-                    <div className="countdown-unit"><div className="num">{days}</div><div className="unit">days</div></div>
-                    <div className="countdown-unit"><div className="num">{hours}</div><div className="unit">hrs</div></div>
-                    <div className="countdown-unit"><div className="num">{mins}</div><div className="unit">min</div></div>
-                    <div className="countdown-unit"><div className="num">{secs}</div><div className="unit">sec</div></div>
-                  </div>
-                </div>
-              </div>
+      <main id="top">
+        <section className="hero">
+          <div className="hero-text">
+            <p className="eyebrow">Astana, Kazakhstan · 2026</p>
+            <h1>Kazakh myth, painted with the people building what comes next.</h1>
+            <p className="lede">
+              {TITLE} is a 12 × 12 in acrylic painting and a digital illustration. Thirteen company logos are hidden inside it.
+            </p>
+            <div className="cta">
+              <a className="btn gold" href="#hidden">Find the logos</a>
+              <a className="btn" href={INSTAGRAM} target="_blank" rel="noreferrer">@velveteengallery</a>
+            </div>
+          </div>
+          <div className="hero-img">
+            <img src={heroImg} alt="The painting on an easel in the grass in Astana" />
+          </div>
+        </section>
+
+        <section id="piece" className="sec">
+          <div className="head rv">
+            <p className="eyebrow">The Piece</p>
+            <h2>One scene, two versions.</h2>
+          </div>
+          <div className="two">
+            <figure className="rv">
+              <img src={digitalImg} alt="Digital illustration of drone-carried yurts, a pegasus, satellites and a rocket" />
+              <figcaption>
+                <b>Digital illustration</b>
+                <span>The original scene, shown on the LED wall at Alem in Astana.</span>
+              </figcaption>
+            </figure>
+            <div className="stack">
+              <figure className="rv">
+                <img src={lightsImg} alt="The painting in front of a light installation" />
+                <figcaption>
+                  <b>Acrylic painting, 12 × 12 in</b>
+                  <span>Painted from the digital piece, with the logos added by hand.</span>
+                </figcaption>
+              </figure>
+              <figure className="rv">
+                <img src={robotImg} alt="The painting in front of the Digital Bridge robot in Astana" />
+                <figcaption>
+                  <b>With the Digital Bridge robot</b>
+                  <span>Astana, during Digital Bridge week.</span>
+                </figcaption>
+              </figure>
             </div>
           </div>
         </section>
 
-        <section id="tiers">
-          <div className="wrap">
-            <div className="section-kicker">Pick a tier</div>
-            <h2>Three ways in, three levels of placement</h2>
-            <p className="section-lede">Every tier gets your brand permanently embedded in the artwork. Higher tiers get more custom work and more surface area, digital and physical.</p>
+        <section id="hidden" className="sec">
+          <div className="head rv">
+            <p className="eyebrow">In the Paint</p>
+            <h2>Thirteen logos, hidden in plain sight.</h2>
+            <p className="sub">Each mark is painted into the scene. Follow the arrows to find where.</p>
+          </div>
+          <Annotated />
+        </section>
 
-            <div className="tier-grid">
-              {TIERS.map((tier) => (
-                <div className={`tier-card${tier.featured ? ' featured' : ''}`} key={tier.tag}>
-                  <span className="tier-tag">{tier.tag}</span>
-                  <div className="tier-price">{tier.price}</div>
-                  <div className="tier-name">{tier.name}</div>
-                  <p className="tier-desc">{tier.desc}</p>
-                  <ul className="tier-includes">
-                    {tier.includes.map((item) => <li key={item}>{item}</li>)}
-                  </ul>
-                  <div className="tier-avail">{tier.avail}</div>
-                  <a
-                    href={tier.stripeUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn-tier"
-                    onClick={() => handleTierClick(tier.dataTier)}
-                  >
-                    Claim this tier
-                  </a>
-                </div>
-              ))}
-            </div>
+        <section className="sec meaning">
+          <div className="head rv">
+            <p className="eyebrow">What it means</p>
+            <h2>The old world is retiring. The yurt is going to space.</h2>
+          </div>
+          <div className="cols rv">
+            <p>
+              Two dinosaurs share tea beside a stove inside a yurt. They stand for the fossil past, settling in for a quiet retirement. The yurt itself is lifted by drones, the way Kazakhstan is lifting its own future off the ground.
+            </p>
+            <p>
+              Around them is the new frontier. Tulpar, the winged horse of Kazakh myth, runs across the sky. A robot plants a flag on a floating island for Network School. The moon carries the marks of the chains and protocols being built here.
+            </p>
+            <p>
+              Kazakh ornament holds the whole thing together. The gold pattern on the blue banner is traditional, the way a nomad home carries its identity wherever it goes. In the digital version, a golden bird rises above a rocket, a satellite and a robot arm, with the flag of Kazakhstan running down the side.
+            </p>
           </div>
         </section>
 
-        <section id="events">
-          <div className="wrap">
-            <div className="section-kicker">Where the piece shows up</div>
-            <h2>Two stages, one piece</h2>
-            <p className="section-lede">The same artwork travels from a government-facing tech conference in Central Asia to one of the most visible digital art fairs in the US.</p>
-            <div className="event-grid">
-              <div className="event-card">
-                <div className="event-date">October 2026</div>
-                <div className="event-name">AI &amp; Digital Bridge</div>
-                <div className="event-place">Astana, Kazakhstan</div>
-                <p className="event-desc">Created on the ground in Astana during Digital Bridge week, drawing directly on Kazakh mythology and the country's own fossil-fuel-to-space-tech narrative. The digital piece plays as a looping animation on screen at Alem.ai, with a companion 12×12 in acrylic painting on display alongside it. Exact timing within the conference is still being scheduled.</p>
-                <img src={alemScreen} alt="Large screen display at Alem.ai during AI & Digital Bridge" style={{ borderRadius: 'var(--radius-sm)', marginTop: 18, border: '1px solid var(--line)' }} />
-                <p style={{ color: 'var(--text-dim)', fontSize: '12.5px', marginTop: 8 }}>The screen at Alem.ai, where the piece will play during Digital Bridge week.</p>
-              </div>
-              <div className="event-card">
-                <div className="event-date">December 2026</div>
-                <div className="event-name">BitBasel</div>
-                <div className="event-place">Miami, USA</div>
-                <p className="event-desc">The piece travels to Miami during Art Basel week, with placement secured directly through BitBasel's founder. More than 100k collectors, institutions, galleries, luxury brands, and cultural leaders converge on Miami for the world's most influential week in contemporary art. Exact timing within the event is still being scheduled.</p>
-                <img src={bitbaselVenue} alt="BitBasel Miami poolside stage and event setup" style={{ borderRadius: 'var(--radius-sm)', marginTop: 18, border: '1px solid var(--line)' }} />
-                <p style={{ color: 'var(--text-dim)', fontSize: '12.5px', marginTop: 8 }}>BitBasel Miami's poolside stage, the venue the piece is headed for.</p>
-              </div>
-            </div>
+        <section id="people" className="sec">
+          <div className="head rv">
+            <p className="eyebrow">The People</p>
+            <h2>The painting, with the founders it carries.</h2>
+            <p className="sub">Photographed across Astana, from Network School to Digital Bridge.</p>
           </div>
-        </section>
-
-        <section id="perks">
-          <div className="wrap">
-            <div className="section-kicker">Sponsor perks</div>
-            <h2>What every sponsor gets</h2>
-            <p className="section-lede">From the $1,000 tier up, no tier is an afterthought.</p>
-            <div className="perks-grid">
-              <div className="perk">
-                <div className="perk-icon">1</div>
-                <div className="perk-text">Your logo or illustration embedded directly in the artwork, at the tier you choose</div>
-              </div>
-              <div className="perk">
-                <div className="perk-icon">2</div>
-                <div className="perk-text">A photo of your placement, sent directly to you once it's in</div>
-              </div>
-              <div className="perk">
-                <div className="perk-icon">3</div>
-                <div className="perk-text">Public exposure at two real events: Digital Bridge Astana and BitBasel Miami</div>
-              </div>
-              <div className="perk">
-                <div className="perk-icon">4</div>
-                <div className="perk-text">Permanent placement. This isn't a one-day activation, it's part of the piece going forward</div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section id="about">
-          <div className="wrap">
-            <div className="section-kicker">About the artist</div>
-            <div className="about-grid">
-              <div className="about-avatar">V</div>
-              <div>
-                <div className="about-name">Hey, I'm Velveteen</div>
-                <div className="about-handle">@Velveteen0x</div>
-                <div className="about-body">
-                  <p>I've been an artist for as long as I can remember. It's always been my purpose, my mission is simple: spark joy through vibrant color. I work across acrylic painting, digital illustration, and velvet art.</p>
-                  <p>Earlier this year, I stepped away from the entrepreneurial projects I'd spent years supporting to claim that identity unapologetically, as an artist first, no longer an afterthought to everything else I was building. It paid off fast: my first gallery placement came in March 2026, a collaboration with Pink Floyd at the Oscars in LA, alongside a sidequest walking the runway at LA Fashion Week.</p>
-                  <p>I've also been part of the crypto community for years. My first NFT collection, a 2021 collaboration with Des Femmes Magazine, sold out within a week.</p>
-                  <p>In May, I bought a one-way ticket to Singapore. Over the past four months I've lived and worked across eight countries, live painting community-specific pieces for MTN DAO (Salt Lake City), Forma (Bristol, UK), Island DAO (Koh Samui, Thailand), Jake &amp; Debbie's (Da Nang, Vietnam), and Network School. Each piece is made for the community it's created in, not just displayed at it.</p>
-                  <p>I'm in Astana this September building a large-scale piece rooted in real research into Kazakh mythology, architecture, and the country's own transition from a fossil-fuel economy to a space-tech future. It's headed to Digital Bridge, then BitBasel Miami.</p>
-                  <p>Sponsorship funds the production month on the ground: materials, the companion acrylic piece, and getting the work from Astana to Miami intact.</p>
-                  <p>This is year one of putting myself forward as an artist, full time and on the record. Sponsoring this piece means becoming an early supporter of that trajectory, not just a name on a one-off activation.</p>
-                  <p>Follow the process as it happens on Instagram at <a href="https://www.instagram.com/velveteengallery" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--gold)' }}>@velveteengallery</a>.</p>
-                </div>
-                <div className="credentials">
-                  <div className="credential">
-                    <img src={pinkFloydOscars} alt="Velveteen at the Pink Floyd x Oscars gallery exhibit in LA" />
-                    <div className="credential-body">
-                      <strong>Pink Floyd × Oscars</strong>
-                      Gallery placement, LA
-                      <div className="credential-date">March 13, 2026</div>
-                    </div>
-                  </div>
-                  <div className="credential">
-                    <img src={timesSquareNftNyc} alt="Velveteen's art on a Times Square billboard during NFT NYC" />
-                    <div className="credential-body">
-                      <strong>NFT NYC</strong>
-                      Times Square billboard
-                      <div className="credential-date">September 1, 2026</div>
-                    </div>
-                  </div>
-                  <div className="credential">
-                    <img src={bitbaselLivePaint} alt="Velveteen painting live at BitBasel" />
-                    <div className="credential-body">
-                      <strong>BitBasel Miami</strong>
-                      December 2026
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section id="faq">
-          <div className="wrap-narrow">
-            <div className="section-kicker">FAQ</div>
-            <h2>Questions, answered</h2>
-            {FAQS.map((item) => (
-              <details key={item.q}>
-                <summary>{item.q}</summary>
-                <p>{item.a}</p>
-              </details>
+          <div className="grid">
+            {SHOTS.map((s) => (
+              <figure key={s.title} className={'shot rv' + (s.wide ? ' wide' : '')}>
+                <img src={s.src} alt={s.title} loading="lazy" />
+                <figcaption>
+                  <b>{s.title}</b>
+                  <span>{s.text}</span>
+                </figcaption>
+              </figure>
             ))}
+          </div>
+        </section>
+
+        <section id="about" className="sec about">
+          <div className="about-img rv">
+            <img src={miriamImg} alt="Velveteen with the painting in Astana" />
+            <img src={miriam2Img} alt="Velveteen outside the Expo sphere in Astana" className="b" />
+          </div>
+          <div className="about-text rv">
+            <p className="eyebrow">About</p>
+            <h2>Hi, I'm Miriam, also known as Velveteen.</h2>
+            <p>
+              I'm a visual artist working in acrylics, velvet paintings and digital illustration. I studied industrial design at NC State, where I graduated magna cum laude and picked up hands-on fabrication in laser cutting, CNC and 3D printing. I won the Cary Young Visual Arts Scholarship, and I've spent about six years as a graphic designer.
+            </p>
+            <p>
+              My roots are in Web3. My first NFT collection sold out within a week in 2021, and I've stayed close to the Solana community and to top NFT galleries in the US. I'm also the founder of <a href="https://chymira.com" target="_blank" rel="noreferrer">Chymira</a>, a brand strategy and pitch deck studio for deep tech founders. Today I'm a digital nomad, and this piece was made in Astana while working out of Alem.AI with Network School.
+            </p>
+            <h3>Artist statement</h3>
+            <p>
+              I paint the places and communities I pass through, and the people building in them. Kazakh myth and ornament give the work a spine. Bright acrylic and a little humor keep it from getting stiff.
+            </p>
+            <p>
+              Hiding real company logos inside a folk scene is a way to say that technology belongs to a culture and a place. The founders in these photos are not sponsors of the picture. They are part of it.
+            </p>
+            <a className="btn gold" href={INSTAGRAM} target="_blank" rel="noreferrer">Follow @velveteengallery</a>
           </div>
         </section>
       </main>
 
-      <footer id="claim">
-        <div className="wrap">
-          <div className="footer-row">
-            <div>
-              <div className="brand" style={{ marginBottom: 8 }}>Velveteen</div>
-              <p style={{ color: 'var(--text-dim)', fontSize: 14 }}>Questions before sponsoring? Reach out directly.</p>
-            </div>
-            <ul className="footer-links">
-              <li><a href="https://x.com/Velveteen0x" target="_blank" rel="noopener noreferrer">DM on X</a></li>
-              <li><a href="https://www.instagram.com/velveteengallery" target="_blank" rel="noopener noreferrer">Instagram</a></li>
-            </ul>
-          </div>
-          <div className="footer-note">To claim a tier, DM @Velveteen0x on X with the tier you want. You'll get payment details and next steps directly.</div>
-          <div className="legal-links" style={{ marginTop: 24, display: 'flex', flexDirection: 'column', gap: 4, maxWidth: 640 }}>
-            <details className="legal-item">
-              <summary style={{ fontSize: '12.5px', color: 'var(--text-dim)', cursor: 'pointer' }}>Terms</summary>
-              <p style={{ fontSize: 13, color: 'var(--text-muted)', marginTop: 10, lineHeight: 1.6 }}>By sponsoring a tier on this piece, you're purchasing the logo or illustration placement described on this page, not a guarantee of returns, resale value, or a specific level of exposure. Placement position within a tier may vary. Sponsorship funds go directly toward producing, transporting, and exhibiting the artwork. If the piece is not completed or shown at the stated venues for reasons outside my control, sponsors will be offered a full refund or a credit toward a future piece, sponsor's choice.</p>
-            </details>
-            <details className="legal-item">
-              <summary style={{ fontSize: '12.5px', color: 'var(--text-dim)', cursor: 'pointer' }}>Privacy</summary>
-              <p style={{ fontSize: 13, color: 'var(--text-muted)', marginTop: 10, lineHeight: 1.6 }}>I collect only what's needed to fulfill your sponsorship: your name, email, brand name, and logo file. This information is used solely to coordinate placement, send you confirmation photos, and share updates about the piece. It is never sold or shared with third parties.</p>
-            </details>
-            <details className="legal-item">
-              <summary style={{ fontSize: '12.5px', color: 'var(--text-dim)', cursor: 'pointer' }}>Content Policy</summary>
-              <p style={{ fontSize: 13, color: 'var(--text-muted)', marginTop: 10, lineHeight: 1.6 }}>Logos and illustrations must be your own brand assets or work you have the right to use. I reserve the right to decline any submission that infringes on another party's intellectual property, contains hate speech, or is otherwise inappropriate for public exhibition. If declined, you'll be offered a refund.</p>
-            </details>
-          </div>
-        </div>
+      <footer>
+        <span>© 2026 Velveteen</span>
+        <a href={INSTAGRAM} target="_blank" rel="noreferrer">Instagram</a>
+        <a href="https://www.miriamreza.com" target="_blank" rel="noreferrer">miriamreza.com</a>
       </footer>
     </>
   )

@@ -191,7 +191,7 @@ function Annotated() {
 type Shot = { src: string; title: string; text: string; wide?: boolean; tall?: boolean }
 
 const SHOTS: Shot[] = [
-  { src: balajiImg, title: 'Balaji Srinivasan', text: 'Founder of Network School, with the finished painting.' },
+  { src: balajiImg, title: 'Balaji Srinivasan', text: 'Founder of Network School' },
   { src: nvidiaImg, title: 'NVIDIA in Kazakhstan', text: 'Held up at the fireside chat with Jensen Huang, October 23, 2026.', wide: true },
   { src: oliveImg, title: 'Sepehr Vali, Olive', text: 'Founder of Olive, the on-chain options exchange built on Solana.' },
   { src: farcasterImg, title: 'The Farcaster team', text: 'At the Network School wall in Astana.' },

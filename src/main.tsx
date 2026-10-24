@@ -1,9 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import '@fontsource/bagel-fat-one/400.css'
-import '@fontsource/space-grotesk/400.css'
-import '@fontsource/space-grotesk/500.css'
-import '@fontsource/space-grotesk/700.css'
+import '@fontsource/kalam/400.css'
+import '@fontsource/kalam/700.css'
 import App from './App'
 import './index.css'
 

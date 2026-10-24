@@ -40,6 +40,18 @@ const animPoster = Object.values(
 )[0] as string | undefined
 
 const INSTAGRAM = 'https://instagram.com/velveteengallery'
+const X_URL = 'https://x.com/velveteen0x'
+const FARCASTER = 'https://farcaster.xyz/velveteen'
+
+function Socials() {
+  return (
+    <div className="socials">
+      <a className="btn" href={INSTAGRAM} target="_blank" rel="noreferrer"><b>Instagram</b> @velveteengallery</a>
+      <a className="btn" href={X_URL} target="_blank" rel="noreferrer"><b>X</b> @velveteen0x</a>
+      <a className="btn" href={FARCASTER} target="_blank" rel="noreferrer"><b>Farcaster</b> @velveteen</a>
+    </div>
+  )
+}
 const TITLE = 'KZ in Space'
 
 type Spot = {
@@ -242,7 +254,7 @@ export default function App() {
     <>
       <Filters />
       <header className="nav">
-        <a href="#top" className="brand">Velveteen</a>
+        <a href="#top" className="brand">Velveteen Gallery</a>
         <nav>
           <a href="#piece">The Piece</a>
           <a href="#animated">Animated</a>
@@ -263,8 +275,8 @@ export default function App() {
             </p>
             <div className="cta">
               <a className="btn gold" href="#hidden">Find the logos</a>
-              <a className="btn" href={INSTAGRAM} target="_blank" rel="noreferrer">@velveteengallery</a>
             </div>
+            <Socials />
           </div>
           <div className="hero-img">
             <div className="pic">
@@ -412,14 +424,16 @@ export default function App() {
             <p>
               Hiding real company logos inside a folk scene is a way to say that technology belongs to a culture and a place. The founders in these photos are not sponsors of the picture. They are part of it.
             </p>
-            <a className="btn gold" href={INSTAGRAM} target="_blank" rel="noreferrer">Follow @velveteengallery</a>
+            <Socials />
           </div>
         </section>
       </main>
 
       <footer>
-        <span>© 2026 Velveteen</span>
+        <span>© 2026 Velveteen Gallery</span>
         <a href={INSTAGRAM} target="_blank" rel="noreferrer">Instagram</a>
+        <a href={X_URL} target="_blank" rel="noreferrer">X</a>
+        <a href={FARCASTER} target="_blank" rel="noreferrer">Farcaster</a>
         <a href="https://www.miriamreza.com" target="_blank" rel="noreferrer">miriamreza.com</a>
       </footer>
     </>

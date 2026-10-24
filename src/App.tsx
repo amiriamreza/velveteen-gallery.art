@@ -13,6 +13,11 @@ import nsGroupImg from './assets/ns-group.jpg'
 import farcasterImg from './assets/farcaster.jpg'
 import miriamImg from './assets/miriam-1.jpg'
 import miriam2Img from './assets/miriam-2.jpg'
+import formaImg from './assets/paint/forma.jpg'
+import islandImg from './assets/paint/island.jpg'
+import mtnImg from './assets/paint/mtn.jpg'
+import nsPaintImg from './assets/paint/ns.jpg'
+import parkImg from './assets/paint/parkcity.jpg'
 
 import lAstana from './assets/logo-astana-hub.png'
 import lBitcoin from './assets/logo-bitcoin.png'
@@ -133,7 +138,9 @@ function Annotated() {
     <div className="annot" ref={wrap}>
       <div className="col">{LEFT.map(card)}</div>
       <div className="paint" ref={img}>
-        <img src={paintingImg} alt="Acrylic painting with company logos hidden in the scene" />
+        <div className="pic">
+          <img src={paintingImg} alt="Acrylic painting with company logos hidden in the scene" />
+        </div>
         {SPOTS.map((s) => (
           <span
             key={s.id}
@@ -150,7 +157,7 @@ function Annotated() {
       <svg className="lines" aria-hidden="true">
         <defs>
           <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-            <path d="M0 0 L10 5 L0 10 z" fill="#E3B34F" />
+            <path d="M0 0 L10 5 L0 10 z" fill="#FBF200" />
           </marker>
         </defs>
         {lines.map((l) => (
@@ -180,12 +187,43 @@ const SHOTS: Shot[] = [
   { src: nsGroupImg, title: 'Network School members', text: 'In front of the digital piece on the LED wall.', wide: true },
 ]
 
+const WALL: { src: string; title: string; alt: string }[][] = [
+  [
+    { src: formaImg, title: 'Forma Final', alt: 'Acrylic painting of a bridge, a red phone box and a pink unicorn on a yellow ground' },
+    { src: islandImg, title: 'Island DAO', alt: 'Acrylic painting of a monitor lizard drinking from a purple coconut on a beach at sunset' },
+  ],
+  [
+    { src: parkImg, title: 'Park City', alt: 'Velveteen sitting on the road in Park City with a painting of a deer in front of mountains' },
+  ],
+  [
+    { src: mtnImg, title: 'MTN DAO', alt: 'Acrylic painting of a goat climbing coloured blocks under a green and purple night sky' },
+    { src: nsPaintImg, title: 'NS MY', alt: 'Acrylic painting of a pink turtle carrying a green city, floating over a bay' },
+  ],
+]
+
+function Filters() {
+  return (
+    <svg className="defs" aria-hidden="true" focusable="false">
+      <defs>
+        <filter id="rough" x="-3%" y="-3%" width="106%" height="106%">
+          <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="3" seed="4" result="n" />
+          <feDisplacementMap in="SourceGraphic" in2="n" scale="7" xChannelSelector="R" yChannelSelector="G" />
+        </filter>
+        <filter id="edge" x="-2%" y="-35%" width="104%" height="170%">
+          <feTurbulence type="fractalNoise" baseFrequency="0.011 0.07" numOctaves="3" seed="9" result="n" />
+          <feDisplacementMap in="SourceGraphic" in2="n" scale="46" xChannelSelector="R" yChannelSelector="G" />
+        </filter>
+      </defs>
+    </svg>
+  )
+}
+
 function useReveal() {
   useEffect(() => {
     const els = document.querySelectorAll('.rv')
     const io = new IntersectionObserver(
       (es) => es.forEach((e) => e.isIntersecting && e.target.classList.add('in')),
-      { threshold: 0.08 },
+      { threshold: 0, rootMargin: '0px 0px -6% 0px' },
     )
     els.forEach((e) => io.observe(e))
     return () => io.disconnect()
@@ -196,11 +234,13 @@ export default function App() {
   useReveal()
   return (
     <>
+      <Filters />
       <header className="nav">
         <a href="#top" className="brand">Velveteen</a>
         <nav>
           <a href="#piece">The Piece</a>
           <a href="#hidden">In the Paint</a>
+          <a href="#community">Paintings</a>
           <a href="#people">The People</a>
           <a href="#about">About</a>
           <a href={INSTAGRAM} target="_blank" rel="noreferrer">Instagram</a>
@@ -208,12 +248,11 @@ export default function App() {
       </header>
 
       <main id="top">
-        <section className="hero">
+        <section className="band g-yellow hero">
           <div className="hero-text">
-            <p className="eyebrow">Astana, Kazakhstan · 2026</p>
             <h1>Kazakh myth, painted with the people building what comes next.</h1>
             <p className="lede">
-              {TITLE} is a 12 × 12 in acrylic painting and a digital illustration. Thirteen company logos are hidden inside it.
+              {TITLE} is a 12 × 12 in acrylic painting and a digital illustration, made in Astana, Kazakhstan in 2026. Thirteen company logos are hidden inside it.
             </p>
             <div className="cta">
               <a className="btn gold" href="#hidden">Find the logos</a>
@@ -221,18 +260,21 @@ export default function App() {
             </div>
           </div>
           <div className="hero-img">
-            <img src={heroImg} alt="The painting on an easel in the grass in Astana" />
+            <div className="pic">
+              <img src={heroImg} alt="The painting on an easel in the grass in Astana" />
+            </div>
           </div>
         </section>
 
-        <section id="piece" className="sec">
+        <section id="piece" className="band g-sky">
           <div className="head rv">
-            <p className="eyebrow">The Piece</p>
             <h2>One scene, two versions.</h2>
           </div>
           <div className="two">
             <figure className="rv">
-              <img src={digitalImg} alt="Digital illustration of drone-carried yurts, a pegasus, satellites and a rocket" />
+              <div className="pic">
+                <img src={digitalImg} alt="Digital illustration of drone-carried yurts, a pegasus, satellites and a rocket" />
+              </div>
               <figcaption>
                 <b>Digital illustration</b>
                 <span>The original scene, shown on the LED wall at Alem in Astana.</span>
@@ -240,14 +282,18 @@ export default function App() {
             </figure>
             <div className="stack">
               <figure className="rv">
-                <img src={lightsImg} alt="The painting in front of a light installation" />
+                <div className="pic">
+                  <img src={lightsImg} alt="The painting in front of a light installation" />
+                </div>
                 <figcaption>
                   <b>Acrylic painting, 12 × 12 in</b>
                   <span>Painted from the digital piece, with the logos added by hand.</span>
                 </figcaption>
               </figure>
               <figure className="rv">
-                <img src={robotImg} alt="The painting in front of the Digital Bridge robot in Astana" />
+                <div className="pic">
+                  <img src={robotImg} alt="The painting in front of the Digital Bridge robot in Astana" />
+                </div>
                 <figcaption>
                   <b>With the Digital Bridge robot</b>
                   <span>Astana, during Digital Bridge week.</span>
@@ -257,18 +303,16 @@ export default function App() {
           </div>
         </section>
 
-        <section id="hidden" className="sec">
+        <section id="hidden" className="band g-purple">
           <div className="head rv">
-            <p className="eyebrow">In the Paint</p>
             <h2>Thirteen logos, hidden in plain sight.</h2>
             <p className="sub">Each mark is painted into the scene. Follow the arrows to find where.</p>
           </div>
           <Annotated />
         </section>
 
-        <section className="sec meaning">
+        <section className="band g-orange meaning">
           <div className="head rv">
-            <p className="eyebrow">What it means</p>
             <h2>The old world is retiring. The yurt is going to space.</h2>
           </div>
           <div className="cols rv">
@@ -284,16 +328,39 @@ export default function App() {
           </div>
         </section>
 
-        <section id="people" className="sec">
+        <section id="community" className="band g-ink">
           <div className="head rv">
-            <p className="eyebrow">The People</p>
+            <h2>More paintings from the communities I pass through.</h2>
+          </div>
+          <div className="wall">
+            {WALL.map((col, i) => (
+              <div className="c" key={i}>
+                {col.map((w) => (
+                  <figure key={w.title} className="rv">
+                    <div className="pic">
+                      <img src={w.src} alt={w.alt} loading="lazy" />
+                    </div>
+                    <figcaption>
+                      <b>{w.title}</b>
+                    </figcaption>
+                  </figure>
+                ))}
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section id="people" className="band g-lav">
+          <div className="head rv">
             <h2>The painting, with the founders it carries.</h2>
             <p className="sub">Photographed across Astana, from Network School to Digital Bridge.</p>
           </div>
           <div className="grid">
             {SHOTS.map((s) => (
               <figure key={s.title} className={'shot rv' + (s.wide ? ' wide' : '')}>
-                <img src={s.src} alt={s.title} loading="lazy" />
+                <div className="pic">
+                  <img src={s.src} alt={s.title} loading="lazy" />
+                </div>
                 <figcaption>
                   <b>{s.title}</b>
                   <span>{s.text}</span>
@@ -303,13 +370,18 @@ export default function App() {
           </div>
         </section>
 
-        <section id="about" className="sec about">
+        <section id="about" className="band g-yellow about">
           <div className="about-img rv">
-            <img src={miriamImg} alt="Velveteen with the painting in Astana" />
-            <img src={miriam2Img} alt="Velveteen outside the Expo sphere in Astana" className="b" />
+            <div className="pic">
+              <img src={miriamImg} alt="Velveteen with the painting in Astana" />
+            </div>
+            <div className="b">
+              <div className="pic">
+                <img src={miriam2Img} alt="Velveteen outside the Expo sphere in Astana" />
+              </div>
+            </div>
           </div>
           <div className="about-text rv">
-            <p className="eyebrow">About</p>
             <h2>Hi, I'm Miriam, also known as Velveteen.</h2>
             <p>
               I'm a visual artist working in acrylics, velvet paintings and digital illustration. I studied industrial design at NC State, where I graduated magna cum laude and picked up hands-on fabrication in laser cutting, CNC and 3D printing. I won the Cary Young Visual Arts Scholarship, and I've spent about six years as a graphic designer.

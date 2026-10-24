@@ -65,19 +65,19 @@ type Spot = {
 
 // x and y are percent coordinates on painting-acrylic.jpg. Change them here to move a pin.
 const SPOTS: Spot[] = [
-  { id: 'astana', name: 'Astana Hub', where: 'The eye of the left drone', logo: lAstana, x: 26.4, y: 22.5 },
-  { id: 'higgs', name: 'Higgsfield', where: 'Orange squiggle by the right drone rope', logo: lHiggsfield, x: 45.3, y: 29.7 },
-  { id: 'vector', name: 'Vector Vol', where: 'Top of the green tapestry', logo: lVectorvol, x: 22.2, y: 36.6 },
-  { id: 'olive', name: 'Olive', where: 'Blue tile on the yurt wall', logo: lOlive, x: 39.4, y: 39.3 },
-  { id: 'soup', name: 'Soup', where: 'Brown tile on the yurt wall', logo: lSoup, x: 39.4, y: 41.7 },
-  { id: 'farcaster', name: 'Farcaster', where: 'Hidden on the stove', logo: lFarcaster, x: 37.4, y: 48.4 },
-  { id: 'zn', name: 'ZCash Names', where: 'Crater on the moon', logo: lZcashNames, x: 56.9, y: 27.3 },
-  { id: 'eth', name: 'Ethereum', where: 'Crater on the moon', logo: lEthereum, x: 65.9, y: 28.8 },
-  { id: 'sol', name: 'Solana', where: 'Crater on the moon', logo: lSolana, x: 52.7, y: 32.6 },
-  { id: 'zec', name: 'Zcash', where: 'Crater on the moon', logo: lZcash, x: 59.2, y: 34.4 },
-  { id: 'btc', name: 'Bitcoin', where: 'Crater on the moon', logo: lBitcoin, x: 61.9, y: 38.0 },
-  { id: 'ns', name: 'Network School', where: 'The flag', logo: lNS, x: 78.1, y: 66.3 },
-  { id: 'nvidia', name: 'NVIDIA', where: 'Glowing eye on the floating island', logo: lNvidia, x: 62.8, y: 73.1 },
+  { id: 'astana', name: 'Astana Hub', where: 'The eye of the left drone', logo: lAstana, x: 26.4, y: 29.5 },
+  { id: 'higgs', name: 'Higgsfield', where: 'Orange squiggle by the right drone rope', logo: lHiggsfield, x: 45.3, y: 35.0 },
+  { id: 'vector', name: 'Vector Vol', where: 'Top of the green tapestry', logo: lVectorvol, x: 22.2, y: 40.4 },
+  { id: 'olive', name: 'Olive', where: 'Blue tile on the yurt wall', logo: lOlive, x: 39.4, y: 42.5 },
+  { id: 'soup', name: 'Soup', where: 'Brown tile on the yurt wall', logo: lSoup, x: 39.4, y: 44.4 },
+  { id: 'farcaster', name: 'Farcaster', where: 'Hidden on the stove', logo: lFarcaster, x: 37.4, y: 49.6 },
+  { id: 'zn', name: 'ZCash Names', where: 'Crater on the moon', logo: lZcashNames, x: 56.9, y: 33.2 },
+  { id: 'eth', name: 'Ethereum', where: 'Crater on the moon', logo: lEthereum, x: 65.9, y: 34.3 },
+  { id: 'sol', name: 'Solana', where: 'Crater on the moon', logo: lSolana, x: 52.7, y: 37.3 },
+  { id: 'zec', name: 'Zcash', where: 'Crater on the moon', logo: lZcash, x: 59.2, y: 38.7 },
+  { id: 'btc', name: 'Bitcoin', where: 'Crater on the moon', logo: lBitcoin, x: 61.9, y: 41.5 },
+  { id: 'ns', name: 'Network School', where: 'The flag', logo: lNS, x: 79.0, y: 61.7 },
+  { id: 'nvidia', name: 'NVIDIA', where: 'Glowing eye on the floating island', logo: lNvidia, x: 62.8, y: 68.7 },
 ]
 
 const LEFT = SPOTS.filter((s) => s.x < 50)
@@ -114,7 +114,7 @@ function Annotated() {
         const sx = (left ? cb.right : cb.left) - wb.left
         const sy = cb.top + cb.height / 2 - wb.top
         const d = Math.hypot(px - sx, py - sy) || 1
-        const R = 14
+        const R = 2
         out.push({
           id: s.id,
           x1: (left ? cb.right : cb.left) - wb.left,
@@ -164,15 +164,6 @@ function Annotated() {
         <div className="pic">
           <img src={paintingImg} alt="Acrylic painting with company logos hidden in the scene" />
         </div>
-        {SPOTS.map((s) => (
-          <span
-            key={s.id}
-            className={'pin' + (active === s.id ? ' on' : '')}
-            style={{ left: s.x + '%', top: s.y + '%' }}
-            onMouseEnter={() => setActive(s.id)}
-            onMouseLeave={() => setActive(null)}
-          />
-        ))}
       </div>
       <div className="col">{RIGHT.map(card)}</div>
       <svg className="lines" aria-hidden="true">

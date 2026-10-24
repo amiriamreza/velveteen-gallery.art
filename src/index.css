@@ -49,7 +49,7 @@ figcaption span{font-size:17.5px;opacity:.92}
 .hero h1{font-size:clamp(40px,6vw,88px);margin-bottom:26px}
 .lede{font-size:23px;line-height:1.45;max-width:30em;margin-bottom:32px}
 .hero-img .pic{transform:rotate(1.4deg)}
-.hero-img img{max-height:78vh;object-fit:cover}
+.hero-img img{max-height:92vh;object-fit:cover}
 .cta{display:flex;gap:12px;flex-wrap:wrap}
 .btn{display:inline-block;padding:10px 26px 12px;background:var(--red);color:#fff;text-decoration:none;border-radius:999px;font-weight:400;font-size:20px;line-height:1.3;transition:transform .15s,background .15s}
 .btn.gold{background:var(--ink);color:var(--yellow)}
@@ -74,8 +74,6 @@ figcaption span{font-size:17.5px;opacity:.92}
 .lines{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible;z-index:5}
 .lines line{stroke:var(--yellow);stroke-width:2.6;stroke-linecap:round;opacity:.7;filter:url(#rough)}
 .lines line.on{opacity:1;stroke-width:4}
-.pin{position:absolute;transform:translate(-50%,-50%);width:24px;height:24px;border-radius:50%;border:2px solid var(--yellow);background:transparent;box-shadow:0 0 0 1px rgba(23,16,43,.6),inset 0 0 0 1px rgba(23,16,43,.6);cursor:default;transition:transform .18s cubic-bezier(.3,1.6,.5,1);z-index:6}
-.pin.on{transform:translate(-50%,-50%) scale(1.5)}
 .spot{display:flex;align-items:center;gap:10px;color:var(--ink);padding:10px;position:relative;transition:transform .2s cubic-bezier(.3,1.5,.5,1)}
 .spot::before{content:"";position:absolute;inset:0;background:var(--paper);filter:url(#rough);transition:background .15s}
 .spot .logo,.spot .meta{position:relative;z-index:1}

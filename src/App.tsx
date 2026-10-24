@@ -201,15 +201,15 @@ const SHOTS: Shot[] = [
 
 const WALL: { src: string; title: string; alt: string }[][] = [
   [
-    { src: formaImg, title: 'Forma Final', alt: 'Acrylic painting of a bridge, a red phone box and a pink unicorn on a yellow ground' },
-    { src: islandImg, title: 'Island DAO', alt: 'Acrylic painting of a monitor lizard drinking from a purple coconut on a beach at sunset' },
+    { src: formaImg, title: 'Forma Bristol Pop up', alt: 'Acrylic painting of a bridge, a red phone box and a pink unicorn on a yellow ground' },
+    { src: islandImg, title: 'Island DAO v4, Koh Samui, Thailand', alt: 'Acrylic painting of a monitor lizard drinking from a purple coconut on a beach at sunset' },
   ],
   [
-    { src: parkImg, title: 'Park City', alt: 'Velveteen sitting on the road in Park City with a painting of a deer in front of mountains' },
+    { src: parkImg, title: 'The Last Sundance Park City', alt: 'Velveteen sitting on the road in Park City with a painting of a deer in front of mountains' },
   ],
   [
-    { src: mtnImg, title: 'MTN DAO', alt: 'Acrylic painting of a goat climbing coloured blocks under a green and purple night sky' },
-    { src: nsPaintImg, title: 'NS MY', alt: 'Acrylic painting of a pink turtle carrying a green city, floating over a bay' },
+    { src: mtnImg, title: 'MTN DAO v9 Salt Lake City', alt: 'Acrylic painting of a goat climbing coloured blocks under a green and purple night sky' },
+    { src: nsPaintImg, title: 'Network School Malaysia', alt: 'Acrylic painting of a pink turtle carrying a green city, floating over a bay' },
   ],
 ]
 
@@ -250,13 +250,12 @@ export default function App() {
       <header className="nav">
         <a href="#top" className="brand">Velveteen Gallery</a>
         <nav>
-          <a href="#piece">The Piece</a>
+          <a href="#piece">KZ art</a>
           <a href="#animated">Animated</a>
           <a href="#hidden">In the Paint</a>
-          <a href="#community">Paintings</a>
-          <a href="#people">The People</a>
+          <a href="#community">Community art</a>
+          <a href="#people">KZ art founders</a>
           <a href="#about">About</a>
-          <a href={INSTAGRAM} target="_blank" rel="noreferrer">Instagram</a>
         </nav>
       </header>
 
@@ -370,6 +369,10 @@ export default function App() {
               </div>
             ))}
           </div>
+          <p className="more rv">
+            To see all of my work, visit my Instagram{' '}
+            <a href={INSTAGRAM} target="_blank" rel="noreferrer">@velveteengallery</a>
+          </p>
         </section>
 
         <section id="people" className="band g-lav">

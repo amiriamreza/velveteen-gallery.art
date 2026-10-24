@@ -161,3 +161,6 @@ b{font-weight:700}
 .socials .btn b{font-weight:700}
 .about-text .socials{margin-top:20px}
 .about-text .socials .btn{margin-top:0}
+
+.more{text-align:center;margin-top:64px;font-size:24px;color:var(--paper)}
+.more a{color:var(--yellow);text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:2px}

@@ -109,12 +109,18 @@ function Annotated() {
         if (!c) continue
         const cb = c.getBoundingClientRect()
         const left = s.x < 50
+        const px = pb.left + (pb.width * s.x) / 100 - wb.left
+        const py = pb.top + (pb.height * s.y) / 100 - wb.top
+        const sx = (left ? cb.right : cb.left) - wb.left
+        const sy = cb.top + cb.height / 2 - wb.top
+        const d = Math.hypot(px - sx, py - sy) || 1
+        const R = 14
         out.push({
           id: s.id,
           x1: (left ? cb.right : cb.left) - wb.left,
           y1: cb.top + cb.height / 2 - wb.top,
-          x2: pb.left + (pb.width * s.x) / 100 - wb.left,
-          y2: pb.top + (pb.height * s.y) / 100 - wb.top,
+          x2: px - ((px - sx) / d) * R,
+          y2: py - ((py - sy) / d) * R,
         })
       }
       setLines(out)
@@ -141,7 +147,6 @@ function Annotated() {
       onMouseEnter={() => setActive(s.id)}
       onMouseLeave={() => setActive(null)}
     >
-      <span className="num">{SPOTS.indexOf(s) + 1}</span>
       <div className="logo">
         <img src={s.logo} alt={s.name} loading="lazy" />
       </div>
@@ -166,9 +171,7 @@ function Annotated() {
             style={{ left: s.x + '%', top: s.y + '%' }}
             onMouseEnter={() => setActive(s.id)}
             onMouseLeave={() => setActive(null)}
-          >
-            {SPOTS.indexOf(s) + 1}
-          </span>
+          />
         ))}
       </div>
       <div className="col">{RIGHT.map(card)}</div>

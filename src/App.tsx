@@ -407,19 +407,25 @@ export default function App() {
             </div>
           </div>
           <div className="about-text rv">
-            <h2>Hi, I'm Miriam, also known as Velveteen.</h2>
+            <h2>Hi, I’m Velveteen :)</h2>
             <p>
-              I'm a visual artist working in acrylics, velvet paintings and digital illustration. I studied industrial design at NC State, where I graduated magna cum laude and picked up hands-on fabrication in laser cutting, CNC and 3D printing. I won the Cary Young Visual Arts Scholarship, and I've spent about six years as a graphic designer.
+              I’m a visual artist working in acrylics, digital illustration and velvet art. I studied industrial design at NC State and have worked as a graphic designer across many industries, including pharma, education and tech. I’m also the founder of <a href="https://chymira.com/" target="_blank" rel="noreferrer">Chymira</a>, a brand strategy and pitch deck studio for deep tech founders.
             </p>
             <p>
-              My roots are in Web3. My first NFT collection sold out within a week in 2021, and I've stayed close to the Solana community and to top NFT galleries in the US. I'm also the founder of <a href="https://chymira.com" target="_blank" rel="noreferrer">Chymira</a>, a brand strategy and pitch deck studio for deep tech founders. Today I'm a digital nomad, and this piece was made in Astana while working out of Alem.AI with Network School.
+              The Web3 community has shaped my life and my art. In 2021, Des Femmes Magazine commissioned me to illustrate an NFT holiday collection, and it sold out within a week. In 2023 I was commissioned to live paint at a Bitcoin-themed pool party, which led to live painting in cities around the world. In March 2026, my first physical piece went up in a gallery: Art Side of the Moon at BLVKBOOK Gallery in LA during the Oscars, a collaboration with Pink Floyd.
+            </p>
+            <p>
+              In May 2026 I left the US on a one-way ticket to Singapore, and I’ve lived as a digital nomad ever since. I’ve been to 10 countries so far, and I’ve live painted at the communities and pop-ups I’ve found along the way. My art is rooted in the place where it’s made.
             </p>
             <h3>Artist statement</h3>
             <p>
-              I paint the places and communities I pass through, and the people building in them. Kazakh myth and ornament give the work a spine. Bright acrylic and a little humor keep it from getting stiff.
+              I make vibrant, animal-centred compositions on canvas, combining acrylic paint with jewelry velvet for extra texture. My mission is simple: to bring people happiness and joy.
             </p>
             <p>
-              Hiding real company logos inside a folk scene is a way to say that technology belongs to a culture and a place. The founders in these photos are not sponsors of the picture. They are part of it.
+              Velvet has been part of my life since I was six, when a Lisa Frank velvet art kit became the best gift I’d ever received. In 2020 I developed my own style of doodling small shapes that together form a larger image. I used it to draw thirty animal compositions on velvet, bound as The Velveteen Bubble (2021). When I prepared my first gallery piece in March 2026, I added velvet to a canvas for the first time, and it elevated the work.
+            </p>
+            <p>
+              Painting live shapes the work too. I paint in front of people, in the communities and streets where the piece will live, so each art piece carries a little of its surroundings and magic &lt;3
             </p>
             <Socials />
           </div>

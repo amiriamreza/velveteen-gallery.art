@@ -200,14 +200,14 @@ const PROCESS: { src: string; alt: string; text: string; pos: string }[] = [
   { src: rocketImg, alt: 'Velveteen crouching in front of Baikonur replica rockets at sunset', text: 'Standing with replica of Baikonur and rockets', pos: 'center 40%' },
 ]
 
-type Shot = { src: string; title: string; text?: string; wide?: boolean; tall?: boolean }
+type Shot = { src: string; title: string; text?: string; pos?: string; wide?: boolean; tall?: boolean }
 
 const SHOTS: Shot[] = [
   { src: balajiImg, title: 'Balaji Srinivasan', text: 'Founder of Network School' },
   { src: nvidiaImg, title: 'NVIDIA in Kazakhstan', text: 'Held up at the fireside chat with Jensen Huang, October 23, 2026.', wide: true },
   { src: oliveImg, title: 'Sepehr Vali, Olive' },
   { src: farcasterImg, title: 'The Farcaster team' },
-  { src: vectorvolImg, title: 'The Vector Vol team' },
+  { src: vectorvolImg, title: 'The Vector Vol team', pos: '22% center' },
   { src: soupImg, title: 'Soup Team' },
   { src: nsGroupImg, title: 'Network School members', text: 'In front of the digital piece on the LED wall.', wide: true, tall: true },
 ]
@@ -357,7 +357,7 @@ export default function App() {
 
         <section className="band g-orange meaning">
           <div className="head rv">
-            <h2>The old world is retiring. The yurt is going to space.</h2>
+            <h2>The dinosaurs have retired.</h2>
           </div>
           <div className="cols rv">
             <p>
@@ -376,7 +376,7 @@ export default function App() {
               On September 2, 2026, Network School opened its Kazakhstan office inside it, and that’s where I worked while making this piece.
             </p>
             <p>
-              In the digital version, Samruk, the golden bird of Kazakh myth, rises alongside the KazSat-2 satellite and a robotic arm.
+              In the digital version, Samruk, the golden bird of Kazakh myth, rises alongside the <span style={{ whiteSpace: 'nowrap' }}>KazSat-2</span> satellite and a robotic arm.
             </p>
             <p>
               Kazakh ornament holds the whole piece together. The gold pattern on the blue banner is traditional, carrying the identity of a nomad home wherever it goes.
@@ -419,7 +419,7 @@ export default function App() {
             {SHOTS.map((s) => (
               <figure key={s.title} className={'shot rv' + (s.wide ? ' wide' : '') + (s.tall ? ' tall' : '')}>
                 <div className="pic">
-                  <img src={s.src} alt={s.title} loading="lazy" />
+                  <img src={s.src} alt={s.title} loading="lazy" style={s.pos ? { objectPosition: s.pos } : undefined} />
                 </div>
                 <figcaption>
                   <b>{s.title}</b>

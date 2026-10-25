@@ -12,7 +12,7 @@ import nsGroupImg from './assets/ns-group.jpg'
 import farcasterImg from './assets/farcaster.jpg'
 import soupImg from './assets/soup-team.jpg'
 import miriamImg from './assets/miriam-1.jpg'
-import miriam2Img from './assets/miriam-2.jpg'
+import expoImg from './assets/expo-robot.jpg'
 import formaImg from './assets/paint/forma.jpg'
 import islandImg from './assets/paint/island.jpg'
 import mtnImg from './assets/paint/mtn.jpg'
@@ -266,8 +266,8 @@ export default function App() {
           <a href="#piece">KZ art</a>
           <a href="#animated">Animated</a>
           <a href="#hidden">In the Paint</a>
-          <a href="#community">Community art</a>
           <a href="#people">KZ art founders</a>
+          <a href="#community">Community art</a>
           <a href="#about">About</a>
         </nav>
       </header>
@@ -359,28 +359,55 @@ export default function App() {
           <div className="head rv">
             <h2>The dinosaurs have retired.</h2>
           </div>
-          <div className="cols rv">
-            <p>
-              Inside a yurt, the dinosaurs have relaxed. As they are no longer used for their fossil fuel, they now spend their days playing the dombra, sipping tea and enjoying the steam of the sauna.
-            </p>
-            <p>
-              Drones hold up the yurt, just as technology is coming to hold up Kazakhstan’s economy. The country is pouring money into startups and AI, with the government firmly aligned behind that vision. Higgsfield became Kazakhstan’s first AI unicorn.
-            </p>
-            <p>
-              Around the yurt, old and new symbols share the sky. Tulpar, the winged horse of Kazakh myth, runs across the scene. Rockets nod to Baikonur Cosmodrome, the world’s first and largest active spaceport.
-            </p>
-            <p>
-              The Nur Alem sphere was built as the centerpiece of Expo 2017, themed “Future Energy.” When it opened, it was billed as the world’s largest spherical building, and today it ranks third. It now houses Alem.AI, Kazakhstan’s International Center for Artificial Intelligence.
-            </p>
-            <p>
-              On September 2, 2026, Network School opened its Kazakhstan office inside it, and that’s where I worked while making this piece.
-            </p>
-            <p>
-              In the digital version, Samruk, the golden bird of Kazakh myth, rises alongside the <span style={{ whiteSpace: 'nowrap' }}>KazSat-2</span> satellite and a robotic arm.
-            </p>
-            <p>
-              Kazakh ornament holds the whole piece together. The gold pattern on the blue banner is traditional, carrying the identity of a nomad home wherever it goes.
-            </p>
+          <div className="meaning-grid">
+            <div className="cols rv">
+              <p>
+                Inside a yurt, the dinosaurs have relaxed. As they are no longer used for their fossil fuel, they now spend their days playing the dombra, sipping tea and enjoying the steam of the sauna.
+              </p>
+              <p>
+                Drones hold up the yurt, just as technology is coming to hold up Kazakhstan’s economy. The country is pouring money into startups and AI, with the government firmly aligned behind that vision. Higgsfield became Kazakhstan’s first AI unicorn.
+              </p>
+              <p>
+                Around the yurt, old and new symbols share the sky. Tulpar, the winged horse of Kazakh myth, runs across the scene. Rockets nod to Baikonur Cosmodrome, the world’s first and largest active spaceport.
+              </p>
+              <p>
+                The Nur Alem sphere was built as the centerpiece of Expo 2017, themed “Future Energy.” When it opened, it was billed as the world’s largest spherical building, and today it ranks third. It now houses Alem.AI, Kazakhstan’s International Center for Artificial Intelligence.
+              </p>
+              <p>
+                On September 2, 2026, Network School opened its Kazakhstan office inside it, and that’s where I worked while making this piece.
+              </p>
+              <p>
+                In the digital version, Samruk, the golden bird of Kazakh myth, rises alongside the <span style={{ whiteSpace: 'nowrap' }}>KazSat-2</span> satellite and a robotic arm.
+              </p>
+              <p>
+                Kazakh ornament holds the whole piece together. The gold pattern on the blue banner is traditional, carrying the identity of a nomad home wherever it goes.
+              </p>
+            </div>
+            <figure className="rv meaning-photo">
+              <div className="pic">
+                <img src={expoImg} alt="Velveteen sitting in front of the Nur Alem sphere and the Digital Bridge robot in Astana" loading="lazy" />
+              </div>
+            </figure>
+          </div>
+        </section>
+
+        <section id="people" className="band g-lav">
+          <div className="head rv">
+            <h2>Photographed with leaders from the heart of Kazakhstan</h2>
+            <p className="sub">These are the founders part of Network School and helping to shape the tech industry.</p>
+          </div>
+          <div className="grid">
+            {SHOTS.map((s) => (
+              <figure key={s.title} className={'shot rv' + (s.wide ? ' wide' : '') + (s.tall ? ' tall' : '')}>
+                <div className="pic">
+                  <img src={s.src} alt={s.title} loading="lazy" style={s.pos ? { objectPosition: s.pos } : undefined} />
+                </div>
+                <figcaption>
+                  <b>{s.title}</b>
+                  {s.text && <span>{s.text}</span>}
+                </figcaption>
+              </figure>
+            ))}
           </div>
         </section>
 
@@ -410,35 +437,10 @@ export default function App() {
           </p>
         </section>
 
-        <section id="people" className="band g-lav">
-          <div className="head rv">
-            <h2>Photographed with leaders from the heart of Kazakhstan</h2>
-            <p className="sub">These are the founders part of Network School and helping to shape the tech industry.</p>
-          </div>
-          <div className="grid">
-            {SHOTS.map((s) => (
-              <figure key={s.title} className={'shot rv' + (s.wide ? ' wide' : '') + (s.tall ? ' tall' : '')}>
-                <div className="pic">
-                  <img src={s.src} alt={s.title} loading="lazy" style={s.pos ? { objectPosition: s.pos } : undefined} />
-                </div>
-                <figcaption>
-                  <b>{s.title}</b>
-                  {s.text && <span>{s.text}</span>}
-                </figcaption>
-              </figure>
-            ))}
-          </div>
-        </section>
-
         <section id="about" className="band g-yellow about">
           <div className="about-img rv">
             <div className="pic">
               <img src={miriamImg} alt="Velveteen with the painting in Astana" />
-            </div>
-            <div className="b">
-              <div className="pic">
-                <img src={miriam2Img} alt="Velveteen outside the Expo sphere in Astana" />
-              </div>
             </div>
           </div>
           <div className="about-text rv">

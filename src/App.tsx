@@ -248,7 +248,7 @@ export default function App() {
     <>
       <Filters />
       <header className="nav">
-        <a href="#top" className="brand">Velveteen Gallery</a>
+        <a href="#top" className="brand">A Kazakh story: dinosaurs retire, tech rises</a>
         <nav>
           <a href="#piece">KZ art</a>
           <a href="#animated">Animated</a>

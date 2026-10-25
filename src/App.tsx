@@ -17,6 +17,10 @@ import islandImg from './assets/paint/island.jpg'
 import mtnImg from './assets/paint/mtn.jpg'
 import nsPaintImg from './assets/paint/ns.jpg'
 import parkImg from './assets/paint/parkcity.jpg'
+import boothImg from './assets/process-booth.jpg'
+import paintingProcImg from './assets/process-painting.jpg'
+import yurtImg from './assets/process-yurt.jpg'
+import rocketImg from './assets/process-rocket.jpg'
 
 import lAstana from './assets/logo-astana-hub.png'
 import lBitcoin from './assets/logo-bitcoin.png'
@@ -188,6 +192,13 @@ function Annotated() {
   )
 }
 
+const PROCESS: { src: string; alt: string; text: string; pos: string }[] = [
+  { src: boothImg, alt: 'The digital piece on a screen at the Network School booth at Digital Bridge', text: 'Digital piece shown at Digital Bridge Conference 2026', pos: 'center 55%' },
+  { src: paintingProcImg, alt: 'Velveteen painting the acrylic piece at the Alem.AI office', text: 'Painting in progress at Alem.AI office', pos: 'center 35%' },
+  { src: yurtImg, alt: 'Inside a yurt with felt carpets and tassels at Shymbulak Mountain Resort', text: 'Inside of Shymbulak Mountain Resort Yurt in Almaty', pos: 'center 50%' },
+  { src: rocketImg, alt: 'Velveteen crouching in front of Baikonur replica rockets at sunset', text: 'Standing with replica of Baikonur and rockets', pos: 'center 40%' },
+]
+
 type Shot = { src: string; title: string; text: string; wide?: boolean; tall?: boolean }
 
 const SHOTS: Shot[] = [
@@ -287,6 +298,7 @@ export default function App() {
               <figcaption>
                 <b>Digital illustration</b>
                 <span>The original scene, shown on the LED wall at Alem in Astana.</span>
+                <span>Sized to 6912 x 12000 px and 6912 x 3840 animated, drawn with about 2945 layers in Photoshop using a Wacom Cintiq Pro.</span>
               </figcaption>
             </figure>
             <figure className="rv fill">
@@ -295,9 +307,21 @@ export default function App() {
               </div>
               <figcaption>
                 <b>Acrylic painting, 12 × 12 in</b>
-                <span>Painted from the digital piece, with the logos added by hand. Shown with the Digital Bridge robot in Astana.</span>
+                <span>Diligently painted by hand. Shown outside of Alem.AI with the Digital Bridge robot in Astana.</span>
               </figcaption>
             </figure>
+          </div>
+          <div className="process">
+            {PROCESS.map((p) => (
+              <figure key={p.text} className="rv">
+                <div className="pic">
+                  <img src={p.src} alt={p.alt} loading="lazy" style={{ objectPosition: p.pos }} />
+                </div>
+                <figcaption>
+                  <span>{p.text}</span>
+                </figcaption>
+              </figure>
+            ))}
           </div>
         </section>
 

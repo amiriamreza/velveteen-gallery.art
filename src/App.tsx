@@ -361,13 +361,25 @@ export default function App() {
           </div>
           <div className="cols rv">
             <p>
-              Two dinosaurs share tea beside a stove inside a yurt. They stand for the fossil past, settling in for a quiet retirement. The yurt itself is lifted by drones, the way Kazakhstan is lifting its own future off the ground.
+              Inside a yurt, the dinosaurs have relaxed. As they are no longer used for their fossil fuel, they now spend their days playing the dombra, sipping tea and enjoying the steam of the sauna.
             </p>
             <p>
-              Around them is the new frontier. Tulpar, the winged horse of Kazakh myth, runs across the sky. A robot plants a flag on a floating island for Network School. The moon carries the marks of the chains and protocols being built here.
+              Drones hold up the yurt, just as technology is coming to hold up Kazakhstan’s economy. The country is pouring money into startups and AI, with the government firmly aligned behind that vision. Higgsfield became Kazakhstan’s first AI unicorn.
             </p>
             <p>
-              Kazakh ornament holds the whole thing together. The gold pattern on the blue banner is traditional, the way a nomad home carries its identity wherever it goes. In the digital version, a golden bird rises above a rocket, a satellite and a robot arm, with the flag of Kazakhstan running down the side.
+              Around the yurt, old and new symbols share the sky. Tulpar, the winged horse of Kazakh myth, runs across the scene. Rockets nod to Baikonur Cosmodrome, the world’s first and largest active spaceport.
+            </p>
+            <p>
+              The Nur Alem sphere was built as the centerpiece of Expo 2017, themed “Future Energy.” When it opened, it was billed as the world’s largest spherical building, and today it ranks third. It now houses Alem.AI, Kazakhstan’s International Center for Artificial Intelligence.
+            </p>
+            <p>
+              On September 2, 2026, Network School opened its Kazakhstan office inside it, and that’s where I worked while making this piece.
+            </p>
+            <p>
+              In the digital version, Samruk, the golden bird of Kazakh myth, rises alongside the KazSat-2 satellite and a robotic arm.
+            </p>
+            <p>
+              Kazakh ornament holds the whole piece together. The gold pattern on the blue banner is traditional, carrying the identity of a nomad home wherever it goes.
             </p>
           </div>
         </section>

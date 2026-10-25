@@ -206,7 +206,7 @@ const SHOTS: Shot[] = [
   { src: nvidiaImg, title: 'NVIDIA in Kazakhstan', text: 'Held up at the fireside chat with Jensen Huang, October 23, 2026.', wide: true },
   { src: oliveImg, title: 'Sepehr Vali, Olive', text: 'Founder of Olive, the on-chain options exchange built on Solana.' },
   { src: farcasterImg, title: 'The Farcaster team', text: 'At the Network School wall in Astana.' },
-  { src: vectorvolImg, title: 'The Vector Vol team', text: 'Studio visit with the painting.' },
+  { src: vectorvolImg, title: 'The Vector Vol team', text: 'With the team at the Alem.AI office' },
   { src: nsGroupImg, title: 'Network School members', text: 'In front of the digital piece on the LED wall.', wide: true, tall: true },
 ]
 
@@ -398,8 +398,8 @@ export default function App() {
 
         <section id="people" className="band g-lav">
           <div className="head rv">
-            <h2>The painting, with the founders it carries.</h2>
-            <p className="sub">Photographed across Astana, from Network School to Digital Bridge.</p>
+            <h2>Photographed with leaders from the heart of Kazakhstan</h2>
+            <p className="sub">These are the founders part of Network School and helping to shape the tech industry.</p>
           </div>
           <div className="grid">
             {SHOTS.map((s) => (

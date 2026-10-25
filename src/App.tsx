@@ -10,6 +10,7 @@ import oliveImg from './assets/olive.jpg'
 import vectorvolImg from './assets/vectorvol.jpg'
 import nsGroupImg from './assets/ns-group.jpg'
 import farcasterImg from './assets/farcaster.jpg'
+import soupImg from './assets/soup-team.jpg'
 import miriamImg from './assets/miriam-1.jpg'
 import miriam2Img from './assets/miriam-2.jpg'
 import formaImg from './assets/paint/forma.jpg'
@@ -199,14 +200,15 @@ const PROCESS: { src: string; alt: string; text: string; pos: string }[] = [
   { src: rocketImg, alt: 'Velveteen crouching in front of Baikonur replica rockets at sunset', text: 'Standing with replica of Baikonur and rockets', pos: 'center 40%' },
 ]
 
-type Shot = { src: string; title: string; text: string; wide?: boolean; tall?: boolean }
+type Shot = { src: string; title: string; text?: string; wide?: boolean; tall?: boolean }
 
 const SHOTS: Shot[] = [
   { src: balajiImg, title: 'Balaji Srinivasan', text: 'Founder of Network School' },
   { src: nvidiaImg, title: 'NVIDIA in Kazakhstan', text: 'Held up at the fireside chat with Jensen Huang, October 23, 2026.', wide: true },
-  { src: oliveImg, title: 'Sepehr Vali, Olive', text: 'Founder of Olive, the on-chain options exchange built on Solana.' },
-  { src: farcasterImg, title: 'The Farcaster team', text: 'At the Network School wall in Astana.' },
-  { src: vectorvolImg, title: 'The Vector Vol team', text: 'With the team at the Alem.AI office' },
+  { src: oliveImg, title: 'Sepehr Vali, Olive' },
+  { src: farcasterImg, title: 'The Farcaster team' },
+  { src: vectorvolImg, title: 'The Vector Vol team' },
+  { src: soupImg, title: 'Soup Team' },
   { src: nsGroupImg, title: 'Network School members', text: 'In front of the digital piece on the LED wall.', wide: true, tall: true },
 ]
 
@@ -409,7 +411,7 @@ export default function App() {
                 </div>
                 <figcaption>
                   <b>{s.title}</b>
-                  <span>{s.text}</span>
+                  {s.text && <span>{s.text}</span>}
                 </figcaption>
               </figure>
             ))}

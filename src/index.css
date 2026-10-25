@@ -94,9 +94,11 @@ figcaption span{font-size:17.5px;opacity:.92}
 .wall figure:nth-child(even) .pic{transform:rotate(1.1deg)}
 .wall figure:hover .pic{transform:rotate(0) scale(1.025)}
 
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
-.shot.wide{grid-column:span 2}
-.shot.wide:last-child{grid-column:span 3}
+.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:32px}
+.grid>.shot{grid-column:span 3}
+.grid>.shot:first-child{grid-column:span 4}
+.grid>.shot.wide{grid-column:span 8}
+.grid>.shot.wide:last-child{grid-column:span 12}
 .shot{display:flex;flex-direction:column}
 .shot .pic{flex:1;display:flex}
 .shot .pic img{height:100%}
@@ -142,7 +144,7 @@ footer span{font-family:var(--head);font-size:20px}
   .wall .c{gap:36px}
   .wall .c:nth-child(2){margin-top:0}
   .grid{grid-template-columns:1fr}
-  .shot.wide,.shot.wide:last-child{grid-column:auto}
+  .grid>.shot,.grid>.shot:first-child,.grid>.shot.wide,.grid>.shot.wide:last-child{grid-column:auto}
   .two figure.fill .pic{min-height:0}
   .two figure.fill .pic img{position:relative;inset:auto;width:100%;height:auto}
   .about{gap:44px}

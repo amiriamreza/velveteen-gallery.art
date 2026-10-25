@@ -179,3 +179,6 @@ b{font-weight:700}
 .meaning-photo .pic{transform:rotate(1.2deg)}
 .meaning-photo img{display:block;width:100%;height:auto}
 @media (max-width:900px){.meaning-grid{grid-template-columns:1fr;gap:40px}}
+
+.meaning-photos{display:flex;flex-direction:column;gap:40px}
+.meaning-photo:nth-child(2) .pic{transform:rotate(-1deg)}

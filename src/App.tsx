@@ -13,6 +13,7 @@ import farcasterImg from './assets/farcaster.jpg'
 import soupImg from './assets/soup-team.jpg'
 import miriamImg from './assets/miriam-1.jpg'
 import expoImg from './assets/expo-robot.jpg'
+import ceremonyImg from './assets/ns-ceremony.jpg'
 import formaImg from './assets/paint/forma.jpg'
 import islandImg from './assets/paint/island.jpg'
 import mtnImg from './assets/paint/mtn.jpg'
@@ -383,11 +384,21 @@ export default function App() {
                 Kazakh ornament holds the whole piece together. The gold pattern on the blue banner is traditional, carrying the identity of a nomad home wherever it goes.
               </p>
             </div>
-            <figure className="rv meaning-photo">
-              <div className="pic">
-                <img src={expoImg} alt="Velveteen sitting in front of the Nur Alem sphere and the Digital Bridge robot in Astana" loading="lazy" />
-              </div>
-            </figure>
+            <div className="meaning-photos">
+              <figure className="rv meaning-photo">
+                <div className="pic">
+                  <img src={expoImg} alt="Velveteen sitting in front of the Nur Alem sphere and the Digital Bridge robot in Astana" loading="lazy" />
+                </div>
+              </figure>
+              <figure className="rv meaning-photo">
+                <div className="pic">
+                  <img src={ceremonyImg} alt="Officials cutting a ribbon on stage at the Network School Kazakhstan welcome ceremony" loading="lazy" />
+                </div>
+                <figcaption>
+                  <span>Sept 2, 2026 welcome ceremony of NS in KZ</span>
+                </figcaption>
+              </figure>
+            </div>
           </div>
         </section>
 

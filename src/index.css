@@ -30,8 +30,8 @@ h1,h2,h3{font-family:var(--head);font-weight:400;line-height:1.02;letter-spacing
 .g-lav{--ground:var(--lav);--fg:var(--ink)}
 
 .nav{position:sticky;top:0;z-index:40;display:flex;justify-content:space-between;align-items:center;padding:12px 24px;background:var(--ink);color:#fff}
-.brand{font-family:var(--head);font-size:clamp(15px,1.75vw,25px);line-height:1.15;color:var(--yellow);text-decoration:none;letter-spacing:.01em;flex:1 1 auto;min-width:0;padding-right:20px}
-.nav nav{display:flex;gap:24px;flex:none}
+.brand{font-family:var(--head);font-size:27px;color:var(--yellow);text-decoration:none;letter-spacing:.01em}
+.nav nav{display:flex;gap:24px}
 .nav nav a{color:#fff;text-decoration:none;font-size:18px}
 .nav nav a:hover{color:var(--yellow)}
 

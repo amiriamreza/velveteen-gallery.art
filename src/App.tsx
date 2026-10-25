@@ -52,7 +52,7 @@ function Socials() {
     </div>
   )
 }
-const TITLE = 'KZ in Space'
+const TITLE = 'Nomads in Orbit'
 
 type Spot = {
   id: string
@@ -248,7 +248,7 @@ export default function App() {
     <>
       <Filters />
       <header className="nav">
-        <a href="#top" className="brand">A Kazakh story: dinosaurs retire, tech rises</a>
+        <a href="#top" className="brand">Velveteen Gallery</a>
         <nav>
           <a href="#piece">KZ art</a>
           <a href="#animated">Animated</a>
@@ -262,13 +262,10 @@ export default function App() {
       <main id="top">
         <section className="band g-yellow hero">
           <div className="hero-text">
-            <h1>Kazakh myth, painted with the people building what comes next.</h1>
+            <h1>A Kazakh story: dinosaurs retire, tech rises</h1>
             <p className="lede">
-              {TITLE} is a 12 × 12 in acrylic painting and a digital illustration, made in Astana, Kazakhstan in 2026. Thirteen company logos are hidden inside it.
+              {TITLE} is a 12 × 12 in acrylic painting and digital piece with a looping animation, made in Astana, Kazakhstan in 2026. Embedded in the tapestry of the piece are motifs and companies that have shaped Kazakhstan’s rise in tech.
             </p>
-            <div className="cta">
-              <a className="btn gold" href="#hidden">Find the logos</a>
-            </div>
             <Socials />
           </div>
           <div className="hero-img">
@@ -318,7 +315,7 @@ export default function App() {
                 )}
               </div>
               <figcaption>
-                <b>KZ in Space, in motion</b>
+                <b>{TITLE}, in motion</b>
               </figcaption>
             </figure>
           </div>

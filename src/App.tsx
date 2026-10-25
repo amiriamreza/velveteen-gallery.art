@@ -193,7 +193,7 @@ function Annotated() {
 }
 
 const PROCESS: { src: string; alt: string; text: string; pos: string }[] = [
-  { src: boothImg, alt: 'The digital piece on a screen at the Network School booth at Digital Bridge', text: 'Digital piece shown at Digital Bridge Conference 2026', pos: 'center 55%' },
+  { src: boothImg, alt: 'The digital piece on a screen at the Network School booth at Digital Bridge', text: 'Digital piece shown NS booth at Digital Bridge Conference 2026', pos: 'center 55%' },
   { src: paintingProcImg, alt: 'Velveteen painting the acrylic piece at the Alem.AI office', text: 'Painting in progress at Alem.AI office', pos: 'center 35%' },
   { src: yurtImg, alt: 'Inside a yurt with felt carpets and tassels at Shymbulak Mountain Resort', text: 'Inside of Shymbulak Mountain Resort Yurt in Almaty', pos: 'center 50%' },
   { src: rocketImg, alt: 'Velveteen crouching in front of Baikonur replica rockets at sunset', text: 'Standing with replica of Baikonur and rockets', pos: 'center 40%' },
@@ -333,7 +333,7 @@ export default function App() {
             <figure className="rv">
               <div className="pic">
                 {animSrc ? (
-                  <video src={animSrc} poster={animPoster} controls playsInline loop preload="metadata" />
+                  <video src={animSrc} poster={animPoster} autoPlay muted loop playsInline preload="auto" aria-label="Looping animation of Nomads in Orbit" />
                 ) : (
                   <div className="soon">The animation is on its way.</div>
                 )}

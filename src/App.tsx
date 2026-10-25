@@ -395,7 +395,7 @@ export default function App() {
                   <img src={ceremonyImg} alt="Officials cutting a ribbon on stage at the Network School Kazakhstan welcome ceremony" loading="lazy" />
                 </div>
                 <figcaption>
-                  <span>Sept 2, 2026 welcome ceremony of NS in KZ</span>
+                  <span>9/2/2026 welcome ceremony of NS in KZ</span>
                 </figcaption>
               </figure>
             </div>

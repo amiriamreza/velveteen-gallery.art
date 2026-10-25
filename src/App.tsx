@@ -176,14 +176,14 @@ function Annotated() {
             <path d="M0 0 L10 5 L0 10 z" fill="#FBF200" />
           </marker>
         </defs>
-        {lines.map((l) => (
+        {lines.filter((l) => l.id === active).map((l) => (
           <line
             key={l.id}
             x1={l.x1}
             y1={l.y1}
             x2={l.x2}
             y2={l.y2}
-            className={active === l.id ? 'on' : ''}
+            className="on"
             markerEnd="url(#arr)"
           />
         ))}
@@ -347,8 +347,8 @@ export default function App() {
 
         <section id="hidden" className="band g-purple">
           <div className="head rv">
-            <h2>Thirteen logos, hidden in plain sight.</h2>
-            <p className="sub">Each mark is painted into the scene. Follow the arrows to find where.</p>
+            <h2>Details in the scene</h2>
+            <p className="sub">Woven into the scene are logos from the companies that built Kazakhstan’s tech industry and the startups working out of Network School at Alem.AI in Astana. Alongside the myths and ornament, they’re the motifs of Kazakhstan’s modern tech folklore.</p>
           </div>
           <Annotated />
         </section>

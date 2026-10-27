@@ -358,7 +358,7 @@ export default function App() {
 
         <section className="band g-orange meaning">
           <div className="head rv">
-            <h2>The dinosaurs have retired.</h2>
+            <h2>A Kazakh story: dinosaurs retire, tech rises</h2>
           </div>
           <div className="meaning-grid">
             <div className="cols rv">

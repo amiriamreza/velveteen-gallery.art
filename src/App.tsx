@@ -1,5 +1,6 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 
+import Auction from './Auction'
 import heroImg from './assets/hero-grass.jpg'
 import paintingImg from './assets/painting-acrylic.jpg'
 import robotImg from './assets/painting-robot.jpg'
@@ -285,6 +286,7 @@ export default function App() {
             <p className="lede">
               {TITLE} is a 12 × 12 in acrylic painting and digital piece with a looping animation, made in Astana, Kazakhstan in 2026. Embedded in the tapestry of the piece are motifs and companies that have shaped Kazakhstan’s rise in tech.
             </p>
+            <Auction />
             <Socials />
           </div>
           <div className="hero-img">

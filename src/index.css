@@ -188,3 +188,36 @@ b{font-weight:700}
 .nw{white-space:nowrap}
 
 @media (max-width:360px){.hero h1{font-size:31px}}
+
+/* live auction card */
+.auction{background:var(--paper);color:var(--ink);border:3px solid var(--ink);border-radius:18px;padding:20px 22px 22px;max-width:540px;box-shadow:6px 6px 0 var(--ink);margin-bottom:26px}
+.au-top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+.au-status{display:inline-flex;align-items:center;gap:8px;background:var(--red);color:#fff;font-family:'Bagel Fat One',system-ui,sans-serif;font-size:15px;letter-spacing:.04em;text-transform:uppercase;padding:5px 12px 6px;border-radius:999px}
+.au-status i{width:9px;height:9px;border-radius:50%;background:#fff;animation:au-pulse 1.4s ease-in-out infinite}
+.au-status.closed{background:var(--ink)}
+.au-status.closed i{animation:none;opacity:.5}
+@keyframes au-pulse{50%{opacity:.25;transform:scale(.7)}}
+.au-lot{font-size:17px}
+.au-price{display:flex;justify-content:space-between;align-items:flex-end;gap:18px;flex-wrap:wrap}
+.au-price small{display:block;font-size:15px;opacity:.75}
+.au-price>div:first-child b{font-family:'Bagel Fat One',system-ui,sans-serif;font-weight:400;font-size:clamp(38px,4.4vw,56px);line-height:1}
+.au-clock{display:flex;gap:8px}
+.au-clock span{background:var(--ink);color:var(--yellow);border-radius:10px;padding:6px 8px 5px;min-width:54px;text-align:center}
+.au-clock b{display:block;font-family:'Bagel Fat One',system-ui,sans-serif;font-weight:400;font-size:26px;line-height:1.05;font-variant-numeric:tabular-nums}
+.au-clock small{font-size:13px;opacity:.85}
+.au-clock .au-over{background:none;color:var(--ink);font-size:18px;padding:0}
+.au-ends{font-size:16px;margin:10px 0 0;opacity:.8}
+.au-cta{display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin:18px 0 4px}
+.au-cta .btn{margin:0}
+.au-ask{font-size:18px;color:var(--ink);text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:3px}
+.au-row{border-top:2px dashed rgba(23,16,43,.35);margin-top:16px;padding-top:14px}
+.au-row h3{font-family:'Bagel Fat One',system-ui,sans-serif;font-weight:400;font-size:18px;margin:0 0 8px}
+.au-chips{list-style:none;display:flex;flex-wrap:wrap;gap:8px;margin:0;padding:0}
+.au-chips li{border:2px solid var(--ink);border-radius:999px;padding:2px 12px 4px;font-size:17px}
+.au-note{font-size:16px;margin:10px 0 0;opacity:.8}
+.au-row .au-note:first-of-type:last-child{margin-top:0}
+.au-bids{list-style:none;margin:0;padding:0}
+.au-bids li{display:flex;justify-content:space-between;gap:12px;padding:5px 0;font-size:17px;border-bottom:1px solid rgba(23,16,43,.2)}
+.au-bids li b{font-weight:700}
+@media (max-width:560px){.auction{padding:16px 16px 18px;box-shadow:4px 4px 0 var(--ink)}.au-clock span{min-width:48px}}
+@media (prefers-reduced-motion:reduce){.au-status i{animation:none}}

@@ -182,3 +182,7 @@ b{font-weight:700}
 
 .meaning-photos{display:flex;flex-direction:column;gap:28px}
 .meaning-photo:nth-child(2) .pic{transform:rotate(-1deg)}
+
+.nw{white-space:nowrap}
+
+@media (max-width:360px){.hero h1{font-size:31px}}

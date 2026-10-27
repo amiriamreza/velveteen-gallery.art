@@ -276,11 +276,12 @@ export default function App() {
       <main id="top">
         <section className="band g-yellow hero">
           <div className="hero-text">
-            <h1>
+            <h1>{TITLE}</h1>
+            <p className="kicker">
               A Kazakh story:
               <br />
               dinosaurs retire, <span className="nw">tech rises</span>
-            </h1>
+            </p>
             <p className="lede">
               {TITLE} is a 12 × 12 in acrylic painting and digital piece with a looping animation, made in Astana, Kazakhstan in 2026. Embedded in the tapestry of the piece are motifs and companies that have shaped Kazakhstan’s rise in tech.
             </p>

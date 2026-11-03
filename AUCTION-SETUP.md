@@ -30,5 +30,4 @@ dashboard (Customers > customer > Payment methods), or take payment in ZEC by ar
 ## Going live
 1. Add the settings above in Vercel (with test keys first) and redeploy.
 2. Place a test bid, check `/api/admin?key=...`, then swap in live keys and clear the test data.
-3. In `src/spec.ts` set `AUCTION_LIVE = true`. That adds the Auction link to the nav and the
-   "Bid on the painting" button on the main page.
+3. The main page and `/auction/` read the live status automatically. "Bidding opens soon" turns into "Live auction" as soon as the settings are in.

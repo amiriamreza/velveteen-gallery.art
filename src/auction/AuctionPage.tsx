@@ -316,7 +316,7 @@ export default function AuctionPage() {
     <>
       <header className="a-nav">
         <a href="/" className="a-back">← Velveteen Gallery</a>
-        <a href={CONTACT} target="_blank" rel="noreferrer">Inquiries</a>
+        <a href={CONTACT} target="_blank" rel="noreferrer">Message on Instagram</a>
       </header>
 
       <main className="a-main">
@@ -329,7 +329,7 @@ export default function AuctionPage() {
           <h1 id="a-title">Nomads in Orbit</h1>
           <p className="a-sub">Velveteen, 2026. Acrylic on canvas, 12 × 12 in.</p>
 
-          {offline && !s && <p className="a-note">Live bidding is unavailable right now. Please check back soon.</p>}
+          {offline && !s && <p className="a-note">Bidding opens soon. Check back here.</p>}
 
           {s && (
             <>
@@ -425,7 +425,7 @@ export default function AuctionPage() {
           <li><b>Non-payment.</b> If payment is not completed within the payment window, the seller may cancel the sale and offer the painting to the next bidder.</li>
           <li><b>Seller bids.</b> The seller and anyone acting for the seller do not bid.</li>
         </ol>
-        <p className="a-note">Questions before you register? <a href={CONTACT} target="_blank" rel="noreferrer">Send a message</a>.</p>
+        <p className="a-note">Questions before you register? <a href={CONTACT} target="_blank" rel="noreferrer">Message me on Instagram</a>.</p>
       </section>
 
       <footer className="a-foot">

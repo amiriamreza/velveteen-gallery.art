@@ -198,3 +198,20 @@ b{font-weight:700}
 .nav nav a.nav-auction:hover{color:var(--ink);background:#fff}
 @media (max-width:760px){.nav nav{gap:14px}.nav nav a.nav-auction{padding:2px 12px 4px}}
 @media (max-width:760px){.nav .brand{white-space:nowrap;font-size:20px}}
+
+/* hero auction block + caption */
+.hero-auction{background:var(--paper);color:var(--ink);border:3px solid var(--ink);border-radius:16px;padding:18px 22px 20px;max-width:34em;box-shadow:5px 5px 0 var(--ink);margin:0 0 22px}
+.ha-top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.ha-badge{display:inline-flex;align-items:center;gap:8px;background:var(--ink);color:var(--yellow);font-family:var(--head);font-size:14px;letter-spacing:.05em;text-transform:uppercase;padding:4px 12px 5px;border-radius:999px}
+.ha-badge i{width:9px;height:9px;border-radius:50%;background:currentColor;opacity:.55}
+.ha-badge.on{background:var(--red);color:#fff}
+.ha-badge.on i{opacity:1;animation:ha-pulse 1.4s ease-in-out infinite}
+@keyframes ha-pulse{50%{opacity:.25;transform:scale(.7)}}
+.ha-bid{font-size:18px}
+.ha-bid b{font-family:var(--head);font-weight:400;font-size:24px}
+.ha-title{font-family:var(--head);font-size:clamp(22px,2.2vw,28px);line-height:1.1;margin:0 0 8px}
+.hero-auction ul{margin:0 0 14px;padding-left:1.15em;font-size:18px;line-height:1.4;display:grid;gap:3px}
+.hero-auction .btn{margin:0}
+.hero-cap{margin:18px 0 0;text-align:center;font-size:18px}
+.hero-cap b{font-family:var(--head);font-weight:400;font-size:20px}
+@media (prefers-reduced-motion:reduce){.ha-badge.on i{animation:none}}

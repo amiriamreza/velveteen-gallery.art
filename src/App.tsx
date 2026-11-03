@@ -54,10 +54,7 @@ const FARCASTER = 'https://farcaster.xyz/velveteen'
 function Socials() {
   return (
     <div className="socials">
-      <a className="btn" href={INSTAGRAM} target="_blank" rel="noreferrer"><b>Instagram</b> @velveteengallery</a>
-      <a className="btn" href={X_URL} target="_blank" rel="noreferrer"><b>X</b> @velveteen0x</a>
-      <a className="btn" href={FARCASTER} target="_blank" rel="noreferrer"><b>Farcaster</b> @velveteen</a>
-      <a className="btn gold" href={CONTACT} target="_blank" rel="noreferrer"><b>Inquiries</b> DM on Instagram</a>
+      <a className="btn" href={CONTACT} target="_blank" rel="noreferrer"><b>Inquiries</b> DM @velveteengallery on IG</a>
     </div>
   )
 }
@@ -497,7 +494,6 @@ export default function App() {
         <a href={INSTAGRAM} target="_blank" rel="noreferrer">Instagram</a>
         <a href={X_URL} target="_blank" rel="noreferrer">X</a>
         <a href={FARCASTER} target="_blank" rel="noreferrer">Farcaster</a>
-        <a href={CONTACT} target="_blank" rel="noreferrer">Inquiries</a>
         <a href="https://www.miriamreza.com" target="_blank" rel="noreferrer">miriamreza.com</a>
       </footer>
     </>

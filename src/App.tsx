@@ -1,6 +1,7 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 
-import heroImg from './assets/hero-grass.jpg'
+import heroImg from './assets/painting-flat.jpg'
+import { CONTACT, SPEC } from './spec'
 import paintingImg from './assets/painting-acrylic.jpg'
 import robotImg from './assets/painting-robot.jpg'
 import digitalImg from './assets/digital.jpg'
@@ -269,7 +270,8 @@ export default function App() {
           <a href="#hidden">In the Paint</a>
           <a href="#people">KZ art founders</a>
           <a href="#community">Community art</a>
-          <a href="#about">About</a>
+          <a href="#about" className="keep">About</a>
+          <a href="/auction/" className="keep nav-auction">Auction</a>
         </nav>
       </header>
 
@@ -280,11 +282,23 @@ export default function App() {
             <p className="lede">
               {TITLE} is a 12 × 12 in acrylic painting and digital piece with a looping animation, made in Astana, Kazakhstan in 2026. Embedded in the tapestry of the piece are motifs and companies that have shaped Kazakhstan’s rise in tech.
             </p>
+            <dl className="spec" aria-label="Work details">
+              {SPEC.filter(([, v]) => v).map(([k, v]) => (
+                <div key={k}>
+                  <dt>{k}</dt>
+                  <dd>{v}</dd>
+                </div>
+              ))}
+            </dl>
+            <div className="cta">
+              <a className="btn gold" href="/auction/">Bid on the painting</a>
+              <a className="btn" href={CONTACT} target="_blank" rel="noreferrer">Inquiries</a>
+            </div>
             <Socials />
           </div>
           <div className="hero-img">
             <div className="pic">
-              <img src={heroImg} alt="The painting on an easel in the grass in Astana" />
+              <img src={heroImg} alt="Nomads in Orbit, acrylic painting: a yurt with two dinosaurs drinking tea, a purple moon, and a pink robot planting a flag" />
             </div>
           </div>
         </section>
@@ -489,6 +503,7 @@ export default function App() {
         <a href={INSTAGRAM} target="_blank" rel="noreferrer">Instagram</a>
         <a href={X_URL} target="_blank" rel="noreferrer">X</a>
         <a href={FARCASTER} target="_blank" rel="noreferrer">Farcaster</a>
+        <a href={CONTACT} target="_blank" rel="noreferrer">Inquiries</a>
         <a href="https://www.miriamreza.com" target="_blank" rel="noreferrer">miriamreza.com</a>
       </footer>
     </>

@@ -135,7 +135,7 @@ footer span{font-family:var(--head);font-size:20px}
 
 @media (max-width:900px){
   .band{padding-top:80px;padding-bottom:80px}
-  .nav nav a:not(:last-child){display:none}
+  .nav nav a:not(.keep){display:none}
   .hero,.two,.about{grid-template-columns:1fr}
   .hero{gap:32px;padding-top:36px}
   .annot{grid-template-columns:1fr;gap:20px}
@@ -187,3 +187,14 @@ b{font-weight:700}
 .nw{white-space:nowrap}
 
 @media (max-width:360px){.hero h1{font-size:31px}}
+
+/* work documentation + nav auction pill */
+.spec{margin:0 0 24px;max-width:34em;font-size:18px;line-height:1.4;border-top:2px solid var(--ink)}
+.spec div{display:grid;grid-template-columns:7.5em 1fr;gap:12px;padding:6px 0;border-bottom:1px solid rgba(23,16,43,.35)}
+.spec dt{font-family:var(--head);font-size:16px;letter-spacing:.02em}
+.spec dd{margin:0}
+.hero .cta{margin-bottom:4px}
+.nav nav a.nav-auction{background:var(--yellow);color:var(--ink);padding:3px 16px 5px;border-radius:999px}
+.nav nav a.nav-auction:hover{color:var(--ink);background:#fff}
+@media (max-width:760px){.nav nav{gap:14px}.nav nav a.nav-auction{padding:2px 12px 4px}}
+@media (max-width:760px){.nav .brand{white-space:nowrap;font-size:20px}}

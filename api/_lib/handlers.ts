@@ -42,7 +42,7 @@ async function snapshot(d: Deps, cfg: Config) {
       highBid: core.highBid,
       bidCount: core.bidCount,
       highBidderLabel: bids.length ? bids[bids.length - 1].label : null,
-      minNext: minNextBid(core.highBid),
+      minNext: core.highBid > 0 ? minNextBid(core.highBid) : null, // starting price is not published
       reserveMet: reserveMet(cfg, core), // true / false / null (no reserve). The reserve amount is never sent.
       bids: bids
         .slice()

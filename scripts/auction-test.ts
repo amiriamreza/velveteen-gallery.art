@@ -125,8 +125,11 @@ await t('bid rules: start, increments, no self-outbid', async () => {
   const { d } = mk()
   const a = await join(d, 'Ann Lee')
   const b = await join(d, 'Bo Chen', 'b@b.co')
+  const s0: any = await getState(d)
+  assert.equal(s0.body.minNext, null, 'starting price must not be published')
   let r: any = await placeBid(d, { token: a.token, amount: 699 })
   assert.equal(r.body.error, 'too_low')
+  assert.ok(!/\d/.test(r.body.message), 'rejection must not reveal the starting price')
   r = await placeBid(d, { token: a.token, amount: 700.5 })
   assert.equal(r.body.error, 'bad_amount')
   r = await placeBid(d, { token: a.token, amount: 700 })
@@ -139,8 +142,9 @@ await t('bid rules: start, increments, no self-outbid', async () => {
   assert.equal(r.status, 200)
   assert.equal(r.body.state.highBid, 725)
   assert.equal(r.body.state.highBidderLabel, 'Bidder 2')
-  r = await placeBid(d, { token: b.token, amount: 100001 })
-  assert.equal(r.body.error, 'bad_amount')
+  r = await placeBid(d, { token: a.token, amount: 250000 }) // no cap on bids
+  assert.equal(r.status, 200)
+  assert.equal(r.body.state.highBid, 250000)
 })
 
 await t('reserve stays hidden and flips when met', async () => {

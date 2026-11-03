@@ -3,7 +3,6 @@
 export const SNIPE_WINDOW_MS = 10 * 60 * 1000
 export const SNIPE_EXTEND_MS = 10 * 60 * 1000
 export const START_BID = 700
-export const MAX_BID = 100_000
 
 /** Minimum raise, in USD, based on the current high bid. */
 export function increment(high: number): number {
@@ -71,13 +70,19 @@ export function checkBid(cfg: Config, core: Core, bidderId: string, amount: numb
   if (st === 'upcoming') return { ok: false, code: 'not_open', message: 'Bidding has not opened yet.' }
   if (st === 'closed') return { ok: false, code: 'closed', message: 'This auction has closed.' }
   if (!Number.isInteger(amount)) return { ok: false, code: 'bad_amount', message: 'Enter a whole dollar amount.' }
-  if (amount > MAX_BID)
-    return { ok: false, code: 'bad_amount', message: `Bids above $${MAX_BID.toLocaleString('en-US')} need to be arranged directly.` }
   if (core.highBidder === bidderId)
     return { ok: false, code: 'already_high', message: 'You are already the high bidder.' }
   const min = minNextBid(core.highBid)
   if (amount < min)
-    return { ok: false, code: 'too_low', message: `The minimum bid is $${min.toLocaleString('en-US')}.` }
+    return {
+      ok: false,
+      code: 'too_low',
+      // The starting price is not published, so the first bid is not told the number.
+      message:
+        core.highBid === 0
+          ? 'Your bid is below the starting price.'
+          : `The minimum bid is $${min.toLocaleString('en-US')}.`,
+    }
   const extended = core.endsAt - now <= SNIPE_WINDOW_MS
   return { ok: true, endsAt: extended ? core.endsAt + SNIPE_EXTEND_MS : core.endsAt, extended }
 }

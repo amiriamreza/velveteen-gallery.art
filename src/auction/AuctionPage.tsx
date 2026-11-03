@@ -17,7 +17,7 @@ interface AState {
   highBid: number
   bidCount: number
   highBidderLabel: string | null
-  minNext: number
+  minNext: number | null
   reserveMet: boolean | null
   bids: PublicBid[]
   publishableKey: string
@@ -202,18 +202,18 @@ function RegisterForm({ publishableKey, onDone }: { publishableKey: string; onDo
 }
 
 function BidForm({ s, me, onState, onSignOut }: { s: AState; me: Me; onState: (s: AState) => void; onSignOut: () => void }) {
-  const [amount, setAmount] = useState(String(s.minNext))
+  const [amount, setAmount] = useState(s.minNext === null ? '' : String(s.minNext))
   const [confirm, setConfirm] = useState(false)
   const [busy, setBusy] = useState(false)
   const [msg, setMsg] = useState<{ ok: boolean; text: string } | null>(null)
   const touched = useRef(false)
 
   useEffect(() => {
-    if (!touched.current) setAmount(String(s.minNext))
+    if (!touched.current) setAmount(s.minNext === null ? '' : String(s.minNext))
   }, [s.minNext])
 
   const n = Number(amount)
-  const valid = Number.isInteger(n) && n >= s.minNext
+  const valid = Number.isInteger(n) && n > 0 && (s.minNext === null || n >= s.minNext)
   const leading = s.highBidderLabel === me.label
 
   async function place() {
@@ -261,7 +261,9 @@ function BidForm({ s, me, onState, onSignOut }: { s: AState; me: Me; onState: (s
           />
         </div>
       </label>
-      <p className="a-note">Minimum {usd(s.minNext)}. No buyer’s premium.</p>
+      <p className="a-note">
+        {s.minNext === null ? 'Enter the amount you wish to bid.' : `Minimum ${usd(s.minNext)}.`} No buyer’s premium.
+      </p>
       {!confirm ? (
         <button className="a-btn" disabled={!valid || leading} onClick={() => setConfirm(true)}>
           Place bid
@@ -325,15 +327,15 @@ export default function AuctionPage() {
         <section className="a-info" aria-labelledby="a-title">
           <p className="a-eyebrow">Auction</p>
           <h1 id="a-title">Nomads in Orbit</h1>
-          <p className="a-sub">Velveteen, 2026. Acrylic painting, 12 × 12 in.</p>
+          <p className="a-sub">Velveteen, 2026. Acrylic on canvas, 12 × 12 in.</p>
 
           {offline && !s && <p className="a-note">Live bidding is unavailable right now. Please check back soon.</p>}
 
           {s && (
             <>
               <div className="a-price">
-                <small>{s.bidCount ? 'Current bid' : 'Opening bid'}</small>
-                <b>{usd(s.bidCount ? s.highBid : 700)}</b>
+                <small>Current bid</small>
+                <b>{s.bidCount ? usd(s.highBid) : 'No bids yet'}</b>
                 <span className="a-meta">
                   {s.bidCount} {s.bidCount === 1 ? 'bid' : 'bids'}
                   {s.reserveMet === false && ' · Reserve not met'}
@@ -389,7 +391,7 @@ export default function AuctionPage() {
               ))}
             </ol>
           ) : (
-            <p className="a-note">No bids yet. Opening bid {usd(700)}.</p>
+            <p className="a-note">No bids yet.</p>
           )}
         </div>
         <div>
@@ -413,6 +415,7 @@ export default function AuctionPage() {
         <h2 id="terms-h">Bidder terms</h2>
         <ol>
           <li><b>Registration.</b> To bid, you register with your name, email and a card. The card is saved with Stripe and is not charged when you register. Velveteen Gallery never sees your card number.</li>
+          <li><b>Starting price.</b> The painting has a starting price that is not published. Bids below it are not accepted. There is no upper limit on bids.</li>
           <li><b>Bids are binding.</b> A bid is an offer to buy at that price. Minimum raises are $25 up to $1,000, $50 up to $2,500, $100 up to $5,000, and $250 above that.</li>
           <li><b>Reserve.</b> The painting is offered with a reserve price that is not published. The page shows whether the reserve has been met. If the reserve is not met by the close, the seller is not obliged to sell.</li>
           <li><b>Closing.</b> The auction closes at the time shown. A bid placed in the final 10 minutes extends the close by 10 minutes, every time, until no bid arrives in the last 10 minutes.</li>

@@ -279,7 +279,7 @@ export default function App() {
           <div className="hero-text">
             <h1>{TITLE}</h1>
             <p className="lede">
-              {TITLE} is a 12 × 12 in acrylic painting and digital piece with a looping animation, made in Astana, Kazakhstan in 2026. Embedded in the tapestry of the piece are motifs and companies that have shaped Kazakhstan’s rise in tech.
+              {TITLE} (2026) is a 12 × 12 in acrylic painting and digital piece with a looping animation, made in Astana, Kazakhstan in 2026. Embedded in the tapestry of the piece are motifs and companies that have shaped Kazakhstan’s rise in tech.
             </p>
             <HeroAuction />
             <Socials />
@@ -288,9 +288,6 @@ export default function App() {
             <div className="pic">
               <img src={heroImg} alt="The painting on an easel in the grass in Astana" />
             </div>
-            <p className="hero-cap">
-              <b>{TITLE}</b>, 2026. Acrylic on canvas, 12 × 12 in.
-            </p>
           </div>
         </section>
 

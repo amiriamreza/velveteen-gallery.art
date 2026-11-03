@@ -1,7 +1,7 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 
 import heroImg from './assets/painting-flat.jpg'
-import { CONTACT, SPEC } from './spec'
+import { AUCTION_LIVE, CONTACT, SPEC } from './spec'
 import paintingImg from './assets/painting-acrylic.jpg'
 import robotImg from './assets/painting-robot.jpg'
 import digitalImg from './assets/digital.jpg'
@@ -271,7 +271,9 @@ export default function App() {
           <a href="#people">KZ art founders</a>
           <a href="#community">Community art</a>
           <a href="#about" className="keep">About</a>
-          <a href="/auction/" className="keep nav-auction">Auction</a>
+          {AUCTION_LIVE && (
+            <a href="/auction/" className="keep nav-auction">Auction</a>
+          )}
         </nav>
       </header>
 
@@ -291,7 +293,7 @@ export default function App() {
               ))}
             </dl>
             <div className="cta">
-              <a className="btn gold" href="/auction/">Bid on the painting</a>
+              {AUCTION_LIVE && <a className="btn gold" href="/auction/">Bid on the painting</a>}
               <a className="btn" href={CONTACT} target="_blank" rel="noreferrer">Inquiries</a>
             </div>
             <Socials />

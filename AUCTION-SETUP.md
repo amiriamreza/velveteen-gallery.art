@@ -11,7 +11,7 @@ Redis (Upstash) and save bidders' cards with Stripe. Money is never moved by the
 | STRIPE_PUBLISHABLE_KEY | Matching publishable key (`pk_test_` / `pk_live_`) |
 | SESSION_SECRET | Any long random string. Signs bidder sessions |
 | ADMIN_TOKEN | Any long random string. Opens `/api/admin?key=...` |
-| AUCTION_RESERVE | Hidden reserve in whole USD. Bidding stays CLOSED until this is set. `0` = no reserve |
+| AUCTION_RESERVE | Hidden reserve in whole USD. Set to `700`. Bidding stays CLOSED until this is set. `0` = no reserve |
 | AUCTION_ENDS_AT | Optional. Default `2026-12-06T21:00:00-05:00` |
 | AUCTION_STARTS_AT | Optional. Bidding opens at this time. Default: immediately |
 | KV_REST_API_URL / KV_REST_API_TOKEN | Added automatically by the Upstash Redis integration from the Vercel Marketplace |
@@ -26,3 +26,9 @@ dashboard (Customers > customer > Payment methods), or take payment in ZEC by ar
 
 ## Tests
 `npm run test:auction` runs the bid rules (increments, reserve, anti-sniping, races, auth).
+
+## Going live
+1. Add the settings above in Vercel (with test keys first) and redeploy.
+2. Place a test bid, check `/api/admin?key=...`, then swap in live keys and clear the test data.
+3. In `src/spec.ts` set `AUCTION_LIVE = true`. That adds the Auction link to the nav and the
+   "Bid on the painting" button on the main page.

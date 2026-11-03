@@ -1,5 +1,11 @@
 export const CONTACT = 'https://ig.me/m/velveteengallery'
 
+/**
+ * Flip to true on the day bidding opens. While false, the main page does not
+ * link to /auction/ (the page itself still exists, just unlinked).
+ */
+export const AUCTION_LIVE = false
+
 // Work documentation. Rows with an empty value are not shown.
 export const SPEC: [string, string][] = [
   ['Title', 'Nomads in Orbit'],
